@@ -1,26 +1,71 @@
 {
-    "name": "recursive-test-exhaust",
-    "private": true,
+    "name": "testing-brain",
+    "displayName": "Testing Brain",
+    "description": "テスト網羅性を可視化するダッシュボード拡張機能",
     "version": "0.1.0",
-    "type": "module",
+    "publisher": "kudoaidesu",
+    "engines": {
+        "vscode": "^1.109.0"
+    },
+    "categories": [
+        "Testing",
+        "Visualization"
+    ],
+    "activationEvents": [],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "testingBrain.open",
+                "title": "Testing Brain: Open Dashboard",
+                "icon": "$(beaker)"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "testing-brain",
+                    "title": "Testing Brain",
+                    "icon": "$(beaker)"
+                }
+            ]
+        },
+        "views": {
+            "testing-brain": [
+                {
+                    "type": "webview",
+                    "id": "testingBrain.dashboard",
+                    "name": "Dashboard"
+                }
+            ]
+        }
+    },
     "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
-        "preview": "vite preview"
+        "build:webview": "vite build",
+        "build:extension": "node esbuild.config.mjs",
+        "compile": "npm run build:webview && npm run build:extension",
+        "watch:extension": "node esbuild.config.mjs --watch",
+        "dev:webview": "vite build --watch",
+        "package": "npm run compile && npx @vscode/vsce package --no-dependencies",
+        "dev": "vite"
     },
     "dependencies": {
+        "clsx": "^2.1.0",
         "framer-motion": "^11.0.0",
         "lucide-react": "^0.344.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "clsx": "^2.1.0",
         "tailwind-merge": "^2.2.1"
     },
     "devDependencies": {
+        "@types/node": "^25.2.3",
         "@types/react": "^18.2.66",
         "@types/react-dom": "^18.2.22",
+        "@types/vscode": "^1.109.0",
+        "@types/vscode-webview": "^1.57.5",
         "@vitejs/plugin-react-swc": "^3.5.0",
         "autoprefixer": "^10.4.18",
+        "esbuild": "^0.20.2",
         "postcss": "^8.4.35",
         "tailwindcss": "^3.4.1",
         "typescript": "^5.2.2",

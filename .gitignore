@@ -4,3 +4,4 @@ dist/
 *.local
 skills/
 .agent/
+*.vsix

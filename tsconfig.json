@@ -25,6 +25,10 @@
     "include": [
         "src"
     ],
+    "exclude": [
+        "src/extension.ts",
+        "src/TestingBrainPanel.ts"
+    ],
     "references": [
         {
             "path": "./tsconfig.node.json"

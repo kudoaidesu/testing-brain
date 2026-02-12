@@ -23,12 +23,34 @@ import type { TestType, TestTypeData } from './types/brain';
 
 type ViewType = TestType | 'overview' | 'history';
 
+// Detect VS Code webview environment
+const isVsCode = typeof (window as any).acquireVsCodeApi === 'function' ||
+    document.body.classList.contains('vscode-dark') ||
+    document.body.classList.contains('vscode-light') ||
+    document.body.classList.contains('vscode-high-contrast');
+
 // --- Theme hook ---
 function useTheme() {
     const [dark, setDark] = useState(() => {
+        if (isVsCode) {
+            // Detect VS Code theme from body class
+            return !document.body.classList.contains('vscode-light');
+        }
         const stored = localStorage.getItem('theme');
         return stored ? stored === 'dark' : true;
     });
+
+    useEffect(() => {
+        if (isVsCode) {
+            // Watch for VS Code theme changes via MutationObserver
+            const observer = new MutationObserver(() => {
+                const isLight = document.body.classList.contains('vscode-light');
+                setDark(!isLight);
+            });
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+            return () => observer.disconnect();
+        }
+    }, []);
 
     useEffect(() => {
         const root = document.documentElement;
@@ -37,10 +59,12 @@ function useTheme() {
         } else {
             root.classList.add('light');
         }
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        if (!isVsCode) {
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+        }
     }, [dark]);
 
-    return { dark, toggle: () => setDark(d => !d) };
+    return { dark, toggle: () => setDark(d => !d), isVsCode };
 }
 
 // --- Relative timestamp ---
@@ -64,7 +88,7 @@ function useRelativeTime(isoString: string | undefined): string {
 export default function App() {
     const { state, loading, error, fetchTypeData } = useBrainData();
     const [activeType, setActiveType] = useState<ViewType>('overview');
-    const { dark, toggle: toggleTheme } = useTheme();
+    const { dark, toggle: toggleTheme, isVsCode: isVsCodeEnv } = useTheme();
     const { lang, setLang, t } = useLanguage();
     const relativeTime = useRelativeTime(state?.progress.last_updated);
     const enabledTypes = state?.config?.enabled_types;
@@ -148,24 +172,26 @@ export default function App() {
                             <Globe className="w-3 h-3" />
                             <span className="font-mono text-xs">{lang === 'ja' ? 'EN' : 'JP'}</span>
                         </button>
-                        {/* Theme toggle */}
-                        <button
-                            onClick={toggleTheme}
-                            className="p-1 rounded-md transition-colors"
-                            style={{
-                                color: 'var(--fg-secondary)',
-                                border: '1px solid var(--border)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                width: '26px',
-                                height: '26px'
-                            }}
-                            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
-                            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
-                        >
-                            {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-                        </button>
+                        {/* Theme toggle — hidden in VS Code (auto-follows theme) */}
+                        {!isVsCodeEnv && (
+                            <button
+                                onClick={toggleTheme}
+                                className="p-1 rounded-md transition-colors"
+                                style={{
+                                    color: 'var(--fg-secondary)',
+                                    border: '1px solid var(--border)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '26px',
+                                    height: '26px'
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
+                                onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                            >
+                                {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+                            </button>
+                        )}
                     </div>
                 </div>
             </header>

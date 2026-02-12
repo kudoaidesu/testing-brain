@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 /* ================================================================
    DESIGN TOKENS — Semantic color system
    
@@ -124,11 +122,67 @@
 }
 
 /* ================================================================
+   VS Code Webview Theme Override
+   
+   When running inside VS Code, map VS Code's theme variables
+   to our semantic tokens. This makes the app auto-follow the
+   VS Code color theme.
+   ================================================================ */
+
+body.vscode-dark {
+  --bg: var(--vscode-editor-background, #1e1e1e);
+  --bg-subtle: var(--vscode-sideBar-background, #252526);
+  --bg-inset: var(--vscode-input-background, #3c3c3c);
+  --surface: var(--vscode-sideBar-background, #252526);
+  --surface-hover: var(--vscode-list-hoverBackground, #2a2d2e);
+  --surface-active: var(--vscode-list-activeSelectionBackground, #094771);
+  --fg: var(--vscode-editor-foreground, #cccccc);
+  --fg-secondary: var(--vscode-descriptionForeground, #a0a0a0);
+  --fg-muted: var(--vscode-disabledForeground, #6a6a6a);
+  --border: var(--vscode-panel-border, #3c3c3c);
+  --border-subtle: var(--vscode-widget-border, #2b2b2b);
+  --bg-card: var(--vscode-editorWidget-background, #252526);
+  --shadow: rgba(0, 0, 0, 0.5);
+}
+
+body.vscode-light {
+  --bg: var(--vscode-editor-background, #ffffff);
+  --bg-subtle: var(--vscode-sideBar-background, #f3f3f3);
+  --bg-inset: var(--vscode-input-background, #ffffff);
+  --surface: var(--vscode-sideBar-background, #f3f3f3);
+  --surface-hover: var(--vscode-list-hoverBackground, #e8e8e8);
+  --surface-active: var(--vscode-list-activeSelectionBackground, #0060c0);
+  --fg: var(--vscode-editor-foreground, #333333);
+  --fg-secondary: var(--vscode-descriptionForeground, #717171);
+  --fg-muted: var(--vscode-disabledForeground, #a0a0a0);
+  --border: var(--vscode-panel-border, #e5e5e5);
+  --border-subtle: var(--vscode-widget-border, #e8e8e8);
+  --bg-card: var(--vscode-editorWidget-background, #ffffff);
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body.vscode-high-contrast {
+  --bg: var(--vscode-editor-background, #000000);
+  --bg-subtle: var(--vscode-sideBar-background, #000000);
+  --bg-inset: var(--vscode-input-background, #000000);
+  --surface: var(--vscode-sideBar-background, #000000);
+  --surface-hover: var(--vscode-list-hoverBackground, #0a0a0a);
+  --surface-active: var(--vscode-list-activeSelectionBackground, #0a0a0a);
+  --fg: var(--vscode-editor-foreground, #ffffff);
+  --fg-secondary: var(--vscode-descriptionForeground, #d4d4d4);
+  --fg-muted: var(--vscode-disabledForeground, #a0a0a0);
+  --border: var(--vscode-contrastBorder, #6fc3df);
+  --border-subtle: var(--vscode-contrastBorder, #6fc3df);
+  --bg-card: var(--vscode-editorWidget-background, #000000);
+  --shadow: rgba(0, 0, 0, 0.8);
+}
+
+/* ================================================================
    BASE STYLES
    ================================================================ */
 
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--vscode-font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
 }
 
 body {
@@ -145,9 +199,16 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* In VS Code webview, disable background glow (uses editor bg) */
+body.vscode-dark,
+body.vscode-light,
+body.vscode-high-contrast {
+  background-image: none;
+}
+
 code,
 pre {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--vscode-editor-font-family, 'JetBrains Mono', 'Fira Code', monospace);
 }
 
 /* Table cells: no wrapping — tables have horizontal scroll */

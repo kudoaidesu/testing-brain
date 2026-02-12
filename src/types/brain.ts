@@ -398,6 +398,34 @@ export interface I18nData {
     locales: I18nLocale[];
 }
 
+// --- Execution History ---
+
+export interface ExecutionRun {
+    id: string;
+    timestamp: string;
+    trigger: 'ci' | 'manual' | 'scheduled';
+    types_run: TestType[];
+    duration_sec: number;
+    summary: {
+        total: number;
+        passed: number;
+        failed: number;
+    };
+}
+
+export interface TypeExecutionSummary {
+    last_run: string;
+    last_result: 'passed' | 'failed' | 'partial';
+    run_count_7d: number;
+    last_pass_rate: number;
+    trend: 'improving' | 'stable' | 'declining';
+}
+
+export interface ExecutionHistory {
+    runs: ExecutionRun[];
+    by_type: Record<TestType, TypeExecutionSummary>;
+}
+
 // --- BrainState (全体) ---
 
 export type TestTypeData = UnitData | IntegrationData | E2EData | ApiData | VisualData | AccessibilityData | PerformanceData | SecurityData | ContractData | MutationData | SmokeData | LoadData | SnapshotData | I18nData;
@@ -405,5 +433,6 @@ export type TestTypeData = UnitData | IntegrationData | E2EData | ApiData | Visu
 export interface BrainState {
     progress: Progress;
     typeData: Partial<Record<TestType, TestTypeData>>;
+    history: ExecutionHistory | null;
 }
 

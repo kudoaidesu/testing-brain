@@ -227,6 +227,25 @@ const translations: Record<Language, Record<string, string>> = {
         'mutation.mutationScore': 'ミューテーションスコア',
         'mutation.killedTotal': '検出/合計',
         'mutation.survivingMutants': '生存変異体',
+
+        // History
+        'nav.history': '履歴',
+        'history.title': '実行履歴',
+        'history.timeline': 'タイムライン',
+        'history.byType': 'テスト形式別の鮮度',
+        'history.trigger.ci': 'CI',
+        'history.trigger.manual': '手動',
+        'history.trigger.scheduled': '定期',
+        'history.testsTotal': '件実行',
+        'history.runsIn7d': '回/7日',
+        'history.freshness.fresh': '新鮮（24h以内）',
+        'history.freshness.stale': 'やや古い（3日以内）',
+        'history.freshness.old': '古い（3日超）',
+        'history.trend.improving': '改善中',
+        'history.trend.stable': '安定',
+        'history.trend.declining': '低下中',
+        'overview.lastRun': '最終実行',
+        'metrics.lastRun': '最終実行',
     },
     en: {
         // Header
@@ -451,6 +470,25 @@ const translations: Record<Language, Record<string, string>> = {
         'mutation.mutationScore': 'Mutation Score',
         'mutation.killedTotal': 'Killed/Total',
         'mutation.survivingMutants': 'Surviving Mutants',
+
+        // History
+        'nav.history': 'History',
+        'history.title': 'Execution History',
+        'history.timeline': 'Timeline',
+        'history.byType': 'Freshness by Test Type',
+        'history.trigger.ci': 'CI',
+        'history.trigger.manual': 'Manual',
+        'history.trigger.scheduled': 'Scheduled',
+        'history.testsTotal': 'total',
+        'history.runsIn7d': ' runs/7d',
+        'history.freshness.fresh': 'Fresh (within 24h)',
+        'history.freshness.stale': 'Getting stale (within 3d)',
+        'history.freshness.old': 'Stale (over 3d)',
+        'history.trend.improving': 'Improving',
+        'history.trend.stable': 'Stable',
+        'history.trend.declining': 'Declining',
+        'overview.lastRun': 'Last Run',
+        'metrics.lastRun': 'Last Run',
     },
 };
 

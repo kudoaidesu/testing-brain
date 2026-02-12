@@ -1,8 +1,8 @@
-import { LayoutGrid, FlaskConical, Link2, Monitor, Globe, Eye, Accessibility, Gauge, Shield, FileText, Bug, Flame, Activity, Camera, Languages } from 'lucide-react';
+import { LayoutGrid, FlaskConical, Link2, Monitor, Globe, Eye, Accessibility, Gauge, Shield, FileText, Bug, Flame, Activity, Camera, Languages, Clock } from 'lucide-react';
 import type { TestType, TestTypeProgress } from '../types/brain';
 import { useLanguage } from '../i18n/i18n';
 
-type ViewType = TestType | 'overview';
+type ViewType = TestType | 'overview' | 'history';
 
 interface TestTypeNavProps {
     activeType: ViewType;
@@ -43,6 +43,12 @@ export function TestTypeNav({ activeType, onTypeChange, progress }: TestTypeNavP
                 onClick={() => onTypeChange('overview')}
                 icon={LayoutGrid}
                 label={t('nav.overview')}
+            />
+            <NavButton
+                active={activeType === 'history'}
+                onClick={() => onTypeChange('history')}
+                icon={Clock}
+                label={t('nav.history')}
             />
 
             {testTypeOrder.map(type => {

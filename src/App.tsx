@@ -17,10 +17,11 @@ import { SmokeView } from './components/types/SmokeView';
 import { LoadView } from './components/types/LoadView';
 import { SnapshotView } from './components/types/SnapshotView';
 import { I18nView } from './components/types/I18nView';
+import { HistoryView, getFreshness, freshnessColor, formatRelativeTime } from './components/HistoryView';
 import { useLanguage } from './i18n/i18n';
 import type { TestType, TestTypeData } from './types/brain';
 
-type ViewType = TestType | 'overview';
+type ViewType = TestType | 'overview' | 'history';
 
 // --- Theme hook ---
 function useTheme() {
@@ -68,7 +69,7 @@ export default function App() {
     const relativeTime = useRelativeTime(state?.progress.last_updated);
 
     useEffect(() => {
-        if (activeType !== 'overview' && state) {
+        if (activeType !== 'overview' && activeType !== 'history' && state) {
             fetchTypeData(activeType as TestType);
         }
     }, [activeType, state]);
@@ -180,12 +181,19 @@ export default function App() {
             {/* コンテンツ */}
             <main className="max-w-screen-xl mx-auto px-3 sm:px-6 pb-12">
                 {activeType === 'overview' ? (
-                    <OverviewDashboard progress={progress} />
+                    <OverviewDashboard progress={progress} history={state.history} />
+                ) : activeType === 'history' ? (
+                    state.history ? (
+                        <HistoryView history={state.history} />
+                    ) : (
+                        <div className="text-sm py-8 text-center" style={{ color: 'var(--fg-muted)' }}>{t('common.loading')}</div>
+                    )
                 ) : (
                     <TypeDetailView
                         type={activeType as TestType}
                         progress={progress.by_test_type[activeType as TestType]}
                         data={state.typeData[activeType as TestType] ?? null}
+                        history={state.history}
                     />
                 )}
             </main>
@@ -195,7 +203,7 @@ export default function App() {
 
 // --- 全体像ダッシュボード ---
 
-function OverviewDashboard({ progress }: { progress: import('./types/brain').Progress }) {
+function OverviewDashboard({ progress, history }: { progress: import('./types/brain').Progress; history: import('./types/brain').ExecutionHistory | null }) {
     const types = Object.entries(progress.by_test_type) as [TestType, import('./types/brain').TestTypeProgress][];
     const { t } = useLanguage();
 
@@ -225,6 +233,7 @@ function OverviewDashboard({ progress }: { progress: import('./types/brain').Pro
                             <th className="text-right px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)' }}>{t('overview.passRate')}</th>
                             <th className="text-right px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)' }}>{t('overview.failures')}</th>
                             <th className="text-left px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)', minWidth: '160px' }}>{t('overview.progress')}</th>
+                            <th className="text-right px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)' }}>{t('overview.lastRun')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -249,6 +258,21 @@ function OverviewDashboard({ progress }: { progress: import('./types/brain').Pro
                                         </div>
                                         <span className="text-xs font-mono w-14 text-right whitespace-nowrap" style={{ color: 'var(--fg-muted)' }}>{tp.created}/{tp.total}</span>
                                     </div>
+                                </td>
+                                <td className="text-right px-3 py-3">
+                                    {(() => {
+                                        const typeSummary = history?.by_type[type];
+                                        if (!typeSummary) return <span className="text-xs" style={{ color: 'var(--fg-muted)' }}>—</span>;
+                                        const freshness = getFreshness(typeSummary.last_run);
+                                        return (
+                                            <div className="flex items-center justify-end gap-1.5">
+                                                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: freshnessColor(freshness) }} />
+                                                <span className="text-xs font-mono whitespace-nowrap" style={{ color: freshnessColor(freshness) }}>
+                                                    {formatRelativeTime(typeSummary.last_run, t)}
+                                                </span>
+                                            </div>
+                                        );
+                                    })()}
                                 </td>
                             </tr>
                         ))}
@@ -286,14 +310,41 @@ function rateColor(value: number): string {
 
 // --- テスト種別詳細 ---
 
-function TypeDetailView({ type, progress, data }: {
+function TypeDetailView({ type, progress, data, history }: {
     type: TestType;
     progress: import('./types/brain').TestTypeProgress;
     data: TestTypeData | null;
+    history: import('./types/brain').ExecutionHistory | null;
 }) {
     const { t } = useLanguage();
+    const typeSummary = history?.by_type[type];
+
     return (
         <div>
+            {/* Last execution info */}
+            {typeSummary && (() => {
+                const freshness = getFreshness(typeSummary.last_run);
+                return (
+                    <div
+                        className="flex items-center gap-2 mb-3 px-3 py-2 rounded-lg text-xs"
+                        style={{
+                            backgroundColor: 'var(--bg-subtle)',
+                            border: '1px solid var(--border-subtle)',
+                        }}
+                    >
+                        <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: freshnessColor(freshness) }} />
+                        <span style={{ color: 'var(--fg-secondary)' }}>{t('metrics.lastRun')}:</span>
+                        <span className="font-mono" style={{ color: freshnessColor(freshness) }}>
+                            {formatRelativeTime(typeSummary.last_run, t)}
+                        </span>
+                        <span style={{ color: 'var(--fg-muted)' }}>·</span>
+                        <span className="font-mono" style={{ color: 'var(--fg-muted)' }}>
+                            {typeSummary.run_count_7d}{t('history.runsIn7d')}
+                        </span>
+                    </div>
+                );
+            })()}
+
             <MetricsBar progress={progress} label={t(`test.${type}`)} testType={type} />
 
             {!data ? (

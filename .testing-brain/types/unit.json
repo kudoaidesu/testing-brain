@@ -1,0 +1,164 @@
+{
+    "test_type": "unit",
+    "last_updated": "2026-02-12T09:18:00.000Z",
+    "coverage": {
+        "line": 100.0,
+        "branch": 85.71,
+        "function": 100.0,
+        "statement": 100.0
+    },
+    "files": [
+        {
+            "path": "src/utils/demo.ts",
+            "test_file": "src/utils/__tests__/demo.test.ts",
+            "functions_total": 2,
+            "functions_tested": 2,
+            "line_coverage": 100.0,
+            "branch_coverage": 100.0,
+            "status": "covered",
+            "tests": [
+                {
+                    "name": "add - should add two positive numbers",
+                    "viewpoint": "正常系：正の数の足し算",
+                    "expected": "2 + 3 = 5",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "add - should add negative numbers",
+                    "viewpoint": "正常系：負の数の足し算",
+                    "expected": "-5 + -3 = -8",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "add - should handle zero",
+                    "viewpoint": "境界値：ゼロを含む計算",
+                    "expected": "0 + 5 = 5, 5 + 0 = 5",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "add - should add decimal numbers",
+                    "viewpoint": "正常系：小数の足し算",
+                    "expected": "1.5 + 2.3 ≈ 3.8",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "subtract - should subtract two positive numbers",
+                    "viewpoint": "正常系：正の数の引き算",
+                    "expected": "5 - 3 = 2",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "subtract - should subtract negative numbers",
+                    "viewpoint": "正常系：負の数の引き算",
+                    "expected": "-5 - -3 = -2",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "subtract - should handle zero",
+                    "viewpoint": "境界値：ゼロを含む計算",
+                    "expected": "5 - 0 = 5, 0 - 5 = -5",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "subtract - should subtract decimal numbers",
+                    "viewpoint": "正常系：小数の引き算",
+                    "expected": "5.5 - 2.3 ≈ 3.2",
+                    "status": "passed",
+                    "duration_ms": 1
+                }
+            ]
+        },
+        {
+            "path": "src/data/testTypeInfo.ts",
+            "test_file": "src/data/__tests__/testTypeInfo.test.ts",
+            "functions_total": 1,
+            "functions_tested": 1,
+            "line_coverage": 100.0,
+            "branch_coverage": 100.0,
+            "status": "covered",
+            "tests": [
+                {
+                    "name": "getTestTypeInfo - should return Japanese info for all test types",
+                    "viewpoint": "正常系：全テスト形式の日本語情報取得",
+                    "expected": "16種類のテスト形式全てで日本語の情報が取得できる",
+                    "status": "passed",
+                    "duration_ms": 2
+                },
+                {
+                    "name": "getTestTypeInfo - should return English info for all test types",
+                    "viewpoint": "正常系：全テスト形式の英語情報取得",
+                    "expected": "16種類のテスト形式全てで英語の情報が取得できる",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "getTestTypeInfo - should return consistent structure between languages",
+                    "viewpoint": "整合性：言語間でのデータ構造の一貫性",
+                    "expected": "日本語と英語で同じフィールド構造とツール数",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "getTestTypeInfo - should return correct unit test info in Japanese",
+                    "viewpoint": "正常系：ユニットテスト情報の正確性（日本語）",
+                    "expected": "名前「単体テスト」、ツールにJest/Vitestを含む",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "getTestTypeInfo - should return correct e2e test info in English",
+                    "viewpoint": "正常系：E2Eテスト情報の正確性（英語）",
+                    "expected": "名前「E2E Tests」、ツールにPlaywright/Cypressを含む",
+                    "status": "passed",
+                    "duration_ms": 1
+                }
+            ]
+        },
+        {
+            "path": "src/components/StatusBadge.tsx",
+            "test_file": "src/components/__tests__/StatusBadge.test.tsx",
+            "functions_total": 1,
+            "functions_tested": 1,
+            "line_coverage": 100.0,
+            "branch_coverage": 85.71,
+            "status": "covered",
+            "tests": [
+                {
+                    "name": "StatusBadge - should render passed status correctly",
+                    "viewpoint": "表示：合格ステータスの表示",
+                    "expected": "「passed」が正しくレンダリングされる",
+                    "status": "passed",
+                    "duration_ms": 10
+                },
+                {
+                    "name": "StatusBadge - should render failed status correctly",
+                    "viewpoint": "表示：失敗ステータスの表示",
+                    "expected": "「failed」が正しくレンダリングされる",
+                    "status": "passed",
+                    "duration_ms": 8
+                },
+                {
+                    "name": "StatusBadge - should render skipped status correctly",
+                    "viewpoint": "表示：スキップステータスの表示",
+                    "expected": "「skipped」が正しくレンダリングされる",
+                    "status": "passed",
+                    "duration_ms": 7
+                },
+                {
+                    "name": "StatusBadge - should render pending status correctly",
+                    "viewpoint": "表示：保留ステータスの表示",
+                    "expected": "「pending」が正しくレンダリングされる",
+                    "status": "passed",
+                    "duration_ms": 8
+                }
+            ]
+        }
+    ]
+}

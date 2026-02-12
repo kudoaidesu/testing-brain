@@ -384,10 +384,6 @@ function TypeDetailView({ type, progress, data, history }: {
                         <span className="font-mono" style={{ color: freshnessColor(freshness) }}>
                             {formatRelativeTime(typeSummary.last_run, t)}
                         </span>
-                        <span style={{ color: 'var(--fg-muted)' }}>·</span>
-                        <span className="font-mono" style={{ color: 'var(--fg-muted)' }}>
-                            {typeSummary.run_count_7d}{t('history.runsIn7d')}
-                        </span>
                     </div>
                 );
             })()}

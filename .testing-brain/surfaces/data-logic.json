@@ -1,0 +1,49 @@
+{
+    "id": "data-logic",
+    "name": "Data Logic",
+    "type": "component",
+    "description": "Data Management Hook and Logic",
+    "source_files": [
+        "src/hooks/useBrainData.ts"
+    ],
+    "created_at": "2026-02-12T16:05:00+09:00",
+    "updated_at": "2026-02-12T16:05:00+09:00",
+    "viewpoints": [
+        {
+            "id": "VP-DATA-001",
+            "category": "data",
+            "title": "Message Parsing",
+            "description": "Correctly parses data received from extension",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-DATA-002",
+            "category": "state",
+            "title": "Loading State",
+            "description": "Shows loading indicator while fetching data",
+            "status": "untested",
+            "priority": "should",
+            "children": []
+        },
+        {
+            "id": "VP-DATA-003",
+            "category": "error",
+            "title": "Error Handling",
+            "description": "Handles missing or corrupt data gracefully",
+            "status": "untested",
+            "priority": "should",
+            "children": []
+        },
+        {
+            "id": "VP-DATA-004",
+            "category": "normal",
+            "title": "Dual Mode",
+            "description": "Falls back to HTTP polling if not in VS Code",
+            "status": "untested",
+            "priority": "should",
+            "children": []
+        }
+    ]
+}

@@ -453,8 +453,8 @@ export interface ExecutionRun {
 }
 
 export interface TypeExecutionSummary {
-    last_run: string;
-    last_result: 'passed' | 'failed' | 'partial';
+    last_run: string | null;
+    last_result: 'passed' | 'failed' | 'partial' | 'untested';
     run_count_7d: number;
     last_pass_rate: number;
     trend: 'improving' | 'stable' | 'declining';

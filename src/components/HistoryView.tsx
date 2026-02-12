@@ -7,7 +7,8 @@ interface HistoryViewProps {
 }
 
 // --- Freshness logic ---
-function getFreshness(isoString: string): 'fresh' | 'stale' | 'old' {
+function getFreshness(isoString: string | null): 'fresh' | 'stale' | 'old' | 'never' {
+    if (!isoString) return 'never';
     const diff = Date.now() - new Date(isoString).getTime();
     const hours = diff / (1000 * 60 * 60);
     if (hours < 24) return 'fresh';
@@ -15,27 +16,30 @@ function getFreshness(isoString: string): 'fresh' | 'stale' | 'old' {
     return 'old';
 }
 
-function freshnessColor(f: 'fresh' | 'stale' | 'old') {
+function freshnessColor(f: 'fresh' | 'stale' | 'old' | 'never') {
     switch (f) {
         case 'fresh': return 'var(--badge-pass-text)';
         case 'stale': return 'var(--badge-warn-text)';
         case 'old': return 'var(--badge-fail-text)';
+        case 'never': return 'var(--fg-muted)';
     }
 }
 
-function freshnessBg(f: 'fresh' | 'stale' | 'old') {
+function freshnessBg(f: 'fresh' | 'stale' | 'old' | 'never') {
     switch (f) {
         case 'fresh': return 'var(--badge-pass-bg)';
         case 'stale': return 'var(--badge-warn-bg)';
         case 'old': return 'var(--badge-fail-bg)';
+        case 'never': return 'var(--bg-subtle)';
     }
 }
 
-function freshnessBorder(f: 'fresh' | 'stale' | 'old') {
+function freshnessBorder(f: 'fresh' | 'stale' | 'old' | 'never') {
     switch (f) {
         case 'fresh': return 'var(--badge-pass-border)';
         case 'stale': return 'var(--badge-warn-border)';
         case 'old': return 'var(--badge-fail-border)';
+        case 'never': return 'var(--border-subtle)';
     }
 }
 
@@ -49,7 +53,8 @@ function formatDuration(sec: number): string {
     return rm > 0 ? `${h}h${rm}m` : `${h}h`;
 }
 
-function formatRelativeTime(isoString: string, t: (key: string, params?: Record<string, string | number>) => string): string {
+function formatRelativeTime(isoString: string | null, t: (key: string, params?: Record<string, string | number>) => string): string {
+    if (!isoString) return t('history.never');
     const diff = Date.now() - new Date(isoString).getTime();
     const minutes = Math.floor(diff / 60000);
     if (minutes < 1) return t('header.justNow');
@@ -122,13 +127,10 @@ function FreshnessCard({ type, summary }: { type: TestType; summary: TypeExecuti
                     title={t(`history.freshness.${freshness}`)}
                 />
             </div>
-            <div className="text-xs font-mono mb-1" style={{ color: freshnessColor(freshness) }}>
+            <div className="text-xs font-mono mb-2" style={{ color: freshnessColor(freshness) }}>
                 {formatRelativeTime(summary.last_run, t)}
             </div>
-            <div className="flex items-center justify-between">
-                <span className="text-xs" style={{ color: 'var(--fg-muted)' }}>
-                    {summary.run_count_7d}{t('history.runsIn7d')}
-                </span>
+            <div className="flex items-center justify-end">
                 <TrendIcon className="w-3 h-3" style={{ color: trendColor }} />
             </div>
             <div className="mt-1">

@@ -1,0 +1,49 @@
+{
+    "id": "history-view",
+    "name": "History View",
+    "type": "component",
+    "description": "Test Execution History Component",
+    "source_files": [
+        "src/components/HistoryView.tsx"
+    ],
+    "created_at": "2026-02-12T16:05:00+09:00",
+    "updated_at": "2026-02-12T16:05:00+09:00",
+    "viewpoints": [
+        {
+            "id": "VP-HIST-001",
+            "category": "display",
+            "title": "History List",
+            "description": "Renders list of past executions correctly",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-HIST-002",
+            "category": "display",
+            "title": "Status Icons",
+            "description": "Shows appropriate icons for pass/fail status",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-HIST-003",
+            "category": "display",
+            "title": "Relative Time",
+            "description": "Displays timestamps relative to current time",
+            "status": "untested",
+            "priority": "nice",
+            "children": []
+        },
+        {
+            "id": "VP-HIST-004",
+            "category": "state",
+            "title": "Empty State",
+            "description": "Shows message when history is empty",
+            "status": "untested",
+            "priority": "nice",
+            "children": []
+        }
+    ]
+}

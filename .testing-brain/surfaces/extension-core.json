@@ -1,0 +1,50 @@
+{
+    "id": "extension-core",
+    "name": "Extension Core",
+    "type": "component",
+    "description": "VS Code Extension Backend Logic",
+    "source_files": [
+        "src/extension.ts",
+        "src/TestingBrainPanel.ts"
+    ],
+    "created_at": "2026-02-12T16:05:00+09:00",
+    "updated_at": "2026-02-12T16:05:00+09:00",
+    "viewpoints": [
+        {
+            "id": "VP-EXT-001",
+            "category": "normal",
+            "title": "Extension Activation",
+            "description": "Extension activates correctly when command is run or view is opened",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-EXT-002",
+            "category": "data",
+            "title": "Data Loading",
+            "description": "Reads data from .testing-brain or testing-brain directory",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-EXT-003",
+            "category": "normal",
+            "title": "File Watching",
+            "description": "Updates data when JSON files in testing-brain change",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-EXT-004",
+            "category": "display",
+            "title": "Webview Creation",
+            "description": "Webview panel is created and serves HTML",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        }
+    ]
+}

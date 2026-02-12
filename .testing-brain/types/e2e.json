@@ -1,0 +1,70 @@
+{
+    "test_type": "e2e",
+    "last_updated": "2026-02-12T09:48:00.000Z",
+    "tool": "VS Code Extension Testing",
+    "scenarios": [
+        {
+            "id": "e2e-001",
+            "name": "拡張機能の存在確認",
+            "viewpoint": "基本動作：拡張機能がインストールされているか",
+            "expected": "kudoaidesu.testing-brain拡張機能が存在する",
+            "test_file": "src/test/suite/extension.test.ts",
+            "status": "passed",
+            "duration_ms": 150,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "拡張機能の取得",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "id": "e2e-002",
+            "name": "拡張機能のアクティベーション",
+            "viewpoint": "基本動作：拡張機能が正常にアクティベートされるか",
+            "expected": "拡張機能がアクティブ状態になる",
+            "test_file": "src/test/suite/extension.test.ts",
+            "status": "passed",
+            "duration_ms": 850,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "拡張機能の取得",
+                    "status": "passed"
+                },
+                {
+                    "order": 2,
+                    "action": "アクティベーション実行",
+                    "status": "passed"
+                },
+                {
+                    "order": 3,
+                    "action": "アクティブ状態の確認",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "id": "e2e-003",
+            "name": "コマンド登録確認",
+            "viewpoint": "基本動作：testingBrain.openコマンドが登録されているか",
+            "expected": "コマンドリストにtestingBrain.openが含まれる",
+            "test_file": "src/test/suite/extension.test.ts",
+            "status": "passed",
+            "duration_ms": 200,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "全コマンドの取得",
+                    "status": "passed"
+                },
+                {
+                    "order": 2,
+                    "action": "testingBrain.openの存在確認",
+                    "status": "passed"
+                }
+            ]
+        }
+    ]
+}

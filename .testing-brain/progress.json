@@ -1,0 +1,37 @@
+{
+    "last_updated": "2026-02-12T09:48:00.000Z",
+    "overall": {
+        "total_tests": 20,
+        "created": 20,
+        "executed": 20,
+        "passed": 20,
+        "failed": 0,
+        "creation_rate": 100,
+        "execution_rate": 100,
+        "pass_rate": 100
+    },
+    "by_test_type": {
+        "unit": {
+            "label": "Unit",
+            "total": 17,
+            "created": 17,
+            "executed": 17,
+            "passed": 17,
+            "failed": 0,
+            "creation_rate": 100,
+            "execution_rate": 100,
+            "pass_rate": 100
+        },
+        "e2e": {
+            "label": "E2E",
+            "total": 3,
+            "created": 3,
+            "executed": 3,
+            "passed": 3,
+            "failed": 0,
+            "creation_rate": 100,
+            "execution_rate": 100,
+            "pass_rate": 100
+        }
+    }
+}

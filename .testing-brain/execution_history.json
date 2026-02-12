@@ -1,0 +1,48 @@
+{
+    "runs": [
+        {
+            "id": "run-1770888480000",
+            "timestamp": "2026-02-12T09:48:00.000Z",
+            "trigger": "manual",
+            "types_run": [
+                "e2e"
+            ],
+            "duration_sec": 2,
+            "summary": {
+                "total": 3,
+                "passed": 3,
+                "failed": 0
+            }
+        },
+        {
+            "id": "run-1770888000000",
+            "timestamp": "2026-02-12T09:18:00.000Z",
+            "trigger": "manual",
+            "types_run": [
+                "unit"
+            ],
+            "duration_sec": 2,
+            "summary": {
+                "total": 17,
+                "passed": 17,
+                "failed": 0
+            }
+        }
+    ],
+    "by_type": {
+        "unit": {
+            "last_run": "2026-02-12T09:18:00.000Z",
+            "last_result": "passed",
+            "run_count_7d": 1,
+            "last_pass_rate": 100,
+            "trend": "stable"
+        },
+        "e2e": {
+            "last_run": "2026-02-12T09:48:00.000Z",
+            "last_result": "passed",
+            "run_count_7d": 1,
+            "last_pass_rate": 100,
+            "trend": "stable"
+        }
+    }
+}

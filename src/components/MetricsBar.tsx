@@ -52,7 +52,7 @@ function MetricItem({ label, value, sub }: { label: string; value: number; sub: 
             : 'var(--badge-fail-text)';
 
     return (
-        <span style={{ color: 'var(--fg-secondary)' }}>
+        <span style={{ color: 'var(--fg-secondary)', minWidth: '140px', display: 'inline-block' }}>
             {label}{' '}
             <span className="font-mono font-semibold" style={{ color }}>{value.toFixed(1)}%</span>
             <span className="ml-1 text-xs" style={{ color: 'var(--fg-muted)' }}>{sub}</span>

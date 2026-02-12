@@ -224,7 +224,7 @@ function OverviewDashboard({ progress }: { progress: import('./types/brain').Pro
                             <th className="text-right px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)' }}>{t('overview.executionRate')}</th>
                             <th className="text-right px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)' }}>{t('overview.passRate')}</th>
                             <th className="text-right px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)' }}>{t('overview.failures')}</th>
-                            <th className="text-left px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)' }}>{t('overview.progress')}</th>
+                            <th className="text-left px-3 py-3 font-medium" style={{ color: 'var(--fg-secondary)', minWidth: '160px' }}>{t('overview.progress')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -242,9 +242,9 @@ function OverviewDashboard({ progress }: { progress: import('./types/brain').Pro
                                 <td className="text-right px-3 py-3 font-mono" style={{ color: rateColor(tp.execution_rate) }}>{tp.execution_rate.toFixed(1)}%</td>
                                 <td className="text-right px-3 py-3 font-mono" style={{ color: rateColor(tp.pass_rate) }}>{tp.pass_rate.toFixed(1)}%</td>
                                 <td className="text-right px-3 py-3 font-mono" style={{ color: tp.failed > 0 ? 'var(--badge-fail-text)' : 'var(--fg-muted)' }}>{tp.failed}</td>
-                                <td className="px-3 py-3">
+                                <td className="px-3 py-3" style={{ minWidth: '160px' }}>
                                     <div className="flex items-center gap-2">
-                                        <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bar-track)' }}>
+                                        <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bar-track)', minWidth: '80px' }}>
                                             <div className="h-full rounded-full" style={{ width: `${tp.creation_rate}%`, backgroundColor: 'var(--bar-executed)' }} />
                                         </div>
                                         <span className="text-xs font-mono w-14 text-right whitespace-nowrap" style={{ color: 'var(--fg-muted)' }}>{tp.created}/{tp.total}</span>

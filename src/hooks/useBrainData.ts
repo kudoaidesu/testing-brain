@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { Progress, TestType, TestTypeData, BrainState, ExecutionHistory } from '../types/brain';
+import type { Progress, TestType, TestTypeData, BrainState, ExecutionHistory, BrainConfig } from '../types/brain';
 
 const BASE_URL = '/testing-brain';
 const POLL_INTERVAL = 3000;
@@ -12,9 +12,10 @@ export function useBrainData() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [progressRes, historyRes] = await Promise.all([
+                const [progressRes, historyRes, configRes] = await Promise.all([
                     fetch(`${BASE_URL}/progress.json`),
                     fetch(`${BASE_URL}/execution_history.json`).catch(() => null),
+                    fetch(`${BASE_URL}/config.json`).catch(() => null),
                 ]);
                 if (!progressRes.ok) throw new Error('Failed to fetch progress');
                 const progress: Progress = await progressRes.json();
@@ -24,10 +25,16 @@ export function useBrainData() {
                     history = await historyRes.json();
                 }
 
+                let config: BrainConfig | null = null;
+                if (configRes && configRes.ok) {
+                    config = await configRes.json();
+                }
+
                 setState(prev => ({
                     progress,
                     typeData: prev?.typeData ?? {},
                     history,
+                    config,
                 }));
                 setError(null);
             } catch (err) {
@@ -65,3 +72,4 @@ export function useBrainData() {
 
     return { state, loading, error, fetchTypeData };
 }
+

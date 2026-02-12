@@ -426,6 +426,23 @@ export interface ExecutionHistory {
     by_type: Record<TestType, TypeExecutionSummary>;
 }
 
+// --- Config ---
+
+export interface BrainConfig {
+    version: string;
+    project: {
+        name: string;
+        description: string;
+        root_path: string;
+        exclude_paths: string[];
+    };
+    settings: {
+        auto_refresh_interval_ms: number;
+        default_template: string;
+    };
+    enabled_types?: TestType[];
+}
+
 // --- BrainState (全体) ---
 
 export type TestTypeData = UnitData | IntegrationData | E2EData | ApiData | VisualData | AccessibilityData | PerformanceData | SecurityData | ContractData | MutationData | SmokeData | LoadData | SnapshotData | I18nData;
@@ -434,5 +451,6 @@ export interface BrainState {
     progress: Progress;
     typeData: Partial<Record<TestType, TestTypeData>>;
     history: ExecutionHistory | null;
+    config: BrainConfig | null;
 }
 

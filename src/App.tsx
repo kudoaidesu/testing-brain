@@ -67,6 +67,7 @@ export default function App() {
     const { dark, toggle: toggleTheme } = useTheme();
     const { lang, setLang, t } = useLanguage();
     const relativeTime = useRelativeTime(state?.progress.last_updated);
+    const enabledTypes = state?.config?.enabled_types;
 
     useEffect(() => {
         if (activeType !== 'overview' && activeType !== 'history' && state) {
@@ -175,13 +176,14 @@ export default function App() {
                     activeType={activeType}
                     onTypeChange={setActiveType}
                     progress={progress.by_test_type}
+                    enabledTypes={enabledTypes}
                 />
             </div>
 
             {/* コンテンツ */}
             <main className="max-w-screen-xl mx-auto px-3 sm:px-6 pb-12">
                 {activeType === 'overview' ? (
-                    <OverviewDashboard progress={progress} history={state.history} />
+                    <OverviewDashboard progress={progress} history={state.history} enabledTypes={enabledTypes} />
                 ) : activeType === 'history' ? (
                     state.history ? (
                         <HistoryView history={state.history} />
@@ -203,8 +205,9 @@ export default function App() {
 
 // --- 全体像ダッシュボード ---
 
-function OverviewDashboard({ progress, history }: { progress: import('./types/brain').Progress; history: import('./types/brain').ExecutionHistory | null }) {
-    const types = Object.entries(progress.by_test_type) as [TestType, import('./types/brain').TestTypeProgress][];
+function OverviewDashboard({ progress, history, enabledTypes }: { progress: import('./types/brain').Progress; history: import('./types/brain').ExecutionHistory | null; enabledTypes?: TestType[] }) {
+    const allTypes = Object.entries(progress.by_test_type) as [TestType, import('./types/brain').TestTypeProgress][];
+    const types = enabledTypes ? allTypes.filter(([type]) => enabledTypes.includes(type)) : allTypes;
     const { t } = useLanguage();
 
     return (

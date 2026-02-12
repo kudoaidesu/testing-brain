@@ -1,18 +1,25 @@
 {
     "version": "1.0.0",
     "project": {
-        "name": "Sample Web App",
-        "description": "テスト網羅性管理のサンプルプロジェクト",
-        "root_path": "../sample-project",
+        "name": "Testing Brain",
+        "description": "テスト網羅性管理ダッシュボード — このアプリ自身のテスト管理",
+        "root_path": ".",
         "exclude_paths": [
             "node_modules",
             "dist",
             ".git",
-            "testing-brain"
+            "public/testing-brain"
         ]
     },
     "settings": {
         "auto_refresh_interval_ms": 3000,
         "default_template": "web-page"
-    }
+    },
+    "enabled_types": [
+        "unit",
+        "e2e",
+        "visual",
+        "snapshot",
+        "i18n"
+    ]
 }

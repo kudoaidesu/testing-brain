@@ -8,6 +8,7 @@ interface TestTypeNavProps {
     activeType: ViewType;
     onTypeChange: (type: ViewType) => void;
     progress: Record<TestType, TestTypeProgress>;
+    enabledTypes?: TestType[];
 }
 
 const testTypeIcons: Record<TestType, typeof FlaskConical> = {
@@ -32,8 +33,11 @@ const testTypeOrder: TestType[] = [
     'performance', 'security', 'contract', 'mutation', 'smoke', 'load', 'snapshot', 'i18n',
 ];
 
-export function TestTypeNav({ activeType, onTypeChange, progress }: TestTypeNavProps) {
+export function TestTypeNav({ activeType, onTypeChange, progress, enabledTypes }: TestTypeNavProps) {
     const { t } = useLanguage();
+    const visibleTypes = enabledTypes
+        ? testTypeOrder.filter(t => enabledTypes.includes(t))
+        : testTypeOrder;
 
     return (
         <nav className="flex items-center gap-1 overflow-x-auto pb-2 mb-4 text-sm">
@@ -51,7 +55,7 @@ export function TestTypeNav({ activeType, onTypeChange, progress }: TestTypeNavP
                 label={t('nav.history')}
             />
 
-            {testTypeOrder.map(type => {
+            {visibleTypes.map(type => {
                 const Icon = testTypeIcons[type];
                 const p = progress[type];
                 return (

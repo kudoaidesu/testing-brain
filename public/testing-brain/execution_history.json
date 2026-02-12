@@ -1,186 +1,83 @@
 {
     "runs": [
         {
-            "id": "run-010",
+            "id": "run-005",
             "timestamp": "2026-02-12T10:30:00+09:00",
             "trigger": "ci",
             "types_run": [
                 "unit",
-                "integration",
-                "smoke"
-            ],
-            "duration_sec": 142,
-            "summary": {
-                "total": 95,
-                "passed": 90,
-                "failed": 5
-            }
-        },
-        {
-            "id": "run-009",
-            "timestamp": "2026-02-12T02:00:00+09:00",
-            "trigger": "scheduled",
-            "types_run": [
-                "unit",
-                "integration",
-                "e2e",
-                "api",
-                "smoke",
                 "snapshot"
             ],
-            "duration_sec": 485,
+            "duration_sec": 85,
             "summary": {
-                "total": 145,
-                "passed": 135,
-                "failed": 10
-            }
-        },
-        {
-            "id": "run-008",
-            "timestamp": "2026-02-11T16:45:00+09:00",
-            "trigger": "manual",
-            "types_run": [
-                "security",
-                "accessibility"
-            ],
-            "duration_sec": 67,
-            "summary": {
-                "total": 7,
-                "passed": 5,
-                "failed": 2
-            }
-        },
-        {
-            "id": "run-007",
-            "timestamp": "2026-02-11T09:15:00+09:00",
-            "trigger": "ci",
-            "types_run": [
-                "unit",
-                "integration",
-                "api"
-            ],
-            "duration_sec": 198,
-            "summary": {
-                "total": 105,
-                "passed": 100,
-                "failed": 5
-            }
-        },
-        {
-            "id": "run-006",
-            "timestamp": "2026-02-10T14:30:00+09:00",
-            "trigger": "ci",
-            "types_run": [
-                "unit",
-                "visual",
-                "snapshot"
-            ],
-            "duration_sec": 312,
-            "summary": {
-                "total": 110,
-                "passed": 104,
-                "failed": 6
-            }
-        },
-        {
-            "id": "run-005",
-            "timestamp": "2026-02-09T22:00:00+09:00",
-            "trigger": "scheduled",
-            "types_run": [
-                "unit",
-                "integration",
-                "e2e",
-                "api",
-                "visual",
-                "accessibility",
-                "performance",
-                "security",
-                "contract",
-                "mutation",
-                "smoke",
-                "load",
-                "snapshot",
-                "i18n"
-            ],
-            "duration_sec": 1847,
-            "summary": {
-                "total": 170,
-                "passed": 150,
-                "failed": 20
+                "total": 38,
+                "passed": 34,
+                "failed": 4
             }
         },
         {
             "id": "run-004",
-            "timestamp": "2026-02-08T11:20:00+09:00",
-            "trigger": "manual",
+            "timestamp": "2026-02-12T02:00:00+09:00",
+            "trigger": "scheduled",
             "types_run": [
+                "unit",
                 "e2e",
-                "visual"
+                "visual",
+                "snapshot",
+                "i18n"
             ],
             "duration_sec": 245,
             "summary": {
-                "total": 25,
-                "passed": 22,
-                "failed": 3
+                "total": 50,
+                "passed": 44,
+                "failed": 6
             }
         },
         {
             "id": "run-003",
-            "timestamp": "2026-02-07T15:45:00+09:00",
-            "trigger": "ci",
-            "types_run": [
-                "unit",
-                "integration",
-                "api",
-                "smoke"
-            ],
-            "duration_sec": 156,
-            "summary": {
-                "total": 110,
-                "passed": 105,
-                "failed": 5
-            }
-        },
-        {
-            "id": "run-002",
-            "timestamp": "2026-02-05T09:00:00+09:00",
+            "timestamp": "2026-02-11T16:00:00+09:00",
             "trigger": "manual",
             "types_run": [
-                "load",
-                "performance"
+                "visual"
             ],
-            "duration_sec": 920,
+            "duration_sec": 120,
             "summary": {
-                "total": 13,
-                "passed": 11,
+                "total": 10,
+                "passed": 8,
                 "failed": 2
             }
         },
         {
-            "id": "run-001",
-            "timestamp": "2026-02-02T02:00:00+09:00",
+            "id": "run-002",
+            "timestamp": "2026-02-10T22:00:00+09:00",
             "trigger": "scheduled",
             "types_run": [
                 "unit",
-                "integration",
                 "e2e",
-                "api",
                 "visual",
-                "accessibility",
-                "performance",
-                "security",
-                "contract",
-                "mutation",
-                "smoke",
-                "load",
                 "snapshot",
                 "i18n"
             ],
-            "duration_sec": 2100,
+            "duration_sec": 230,
             "summary": {
-                "total": 165,
-                "passed": 140,
-                "failed": 25
+                "total": 48,
+                "passed": 42,
+                "failed": 6
+            }
+        },
+        {
+            "id": "run-001",
+            "timestamp": "2026-02-09T14:00:00+09:00",
+            "trigger": "ci",
+            "types_run": [
+                "unit",
+                "e2e"
+            ],
+            "duration_sec": 55,
+            "summary": {
+                "total": 35,
+                "passed": 32,
+                "failed": 3
             }
         }
     ],
@@ -188,15 +85,8 @@
         "unit": {
             "last_run": "2026-02-12T10:30:00+09:00",
             "last_result": "partial",
-            "run_count_7d": 8,
-            "last_pass_rate": 91.7,
-            "trend": "stable"
-        },
-        "integration": {
-            "last_run": "2026-02-12T10:30:00+09:00",
-            "last_result": "partial",
-            "run_count_7d": 6,
-            "last_pass_rate": 87.5,
+            "run_count_7d": 5,
+            "last_pass_rate": 89.3,
             "trend": "stable"
         },
         "e2e": {
@@ -206,80 +96,24 @@
             "last_pass_rate": 100.0,
             "trend": "improving"
         },
-        "api": {
-            "last_run": "2026-02-12T02:00:00+09:00",
-            "last_result": "partial",
-            "run_count_7d": 5,
-            "last_pass_rate": 91.7,
-            "trend": "stable"
-        },
         "visual": {
-            "last_run": "2026-02-10T14:30:00+09:00",
+            "last_run": "2026-02-11T16:00:00+09:00",
             "last_result": "partial",
             "run_count_7d": 3,
-            "last_pass_rate": 88.9,
-            "trend": "declining"
-        },
-        "accessibility": {
-            "last_run": "2026-02-11T16:45:00+09:00",
-            "last_result": "failed",
-            "run_count_7d": 2,
-            "last_pass_rate": 50.0,
-            "trend": "declining"
-        },
-        "performance": {
-            "last_run": "2026-02-09T22:00:00+09:00",
-            "last_result": "passed",
-            "run_count_7d": 2,
-            "last_pass_rate": 100.0,
-            "trend": "stable"
-        },
-        "security": {
-            "last_run": "2026-02-11T16:45:00+09:00",
-            "last_result": "partial",
-            "run_count_7d": 2,
-            "last_pass_rate": 66.7,
-            "trend": "stable"
-        },
-        "contract": {
-            "last_run": "2026-02-09T22:00:00+09:00",
-            "last_result": "partial",
-            "run_count_7d": 1,
-            "last_pass_rate": 75.0,
-            "trend": "stable"
-        },
-        "mutation": {
-            "last_run": "2026-02-09T22:00:00+09:00",
-            "last_result": "partial",
-            "run_count_7d": 1,
-            "last_pass_rate": 75.0,
-            "trend": "stable"
-        },
-        "smoke": {
-            "last_run": "2026-02-12T10:30:00+09:00",
-            "last_result": "partial",
-            "run_count_7d": 5,
             "last_pass_rate": 80.0,
-            "trend": "stable"
-        },
-        "load": {
-            "last_run": "2026-02-09T22:00:00+09:00",
-            "last_result": "partial",
-            "run_count_7d": 2,
-            "last_pass_rate": 66.7,
             "trend": "stable"
         },
         "snapshot": {
-            "last_run": "2026-02-12T02:00:00+09:00",
-            "last_result": "passed",
+            "last_run": "2026-02-12T10:30:00+09:00",
+            "last_result": "partial",
             "run_count_7d": 3,
-            "last_pass_rate": 80.0,
-            "trend": "improving"
+            "last_pass_rate": 83.3,
+            "trend": "stable"
         },
         "i18n": {
-            "last_run": "2026-02-09T22:00:00+09:00",
+            "last_run": "2026-02-12T02:00:00+09:00",
             "last_result": "passed",
-            "run_count_7d": 1,
+            "run_count_7d": 2,
             "last_pass_rate": 100.0,
             "trend": "stable"
         }

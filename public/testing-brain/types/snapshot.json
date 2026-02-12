@@ -1,82 +1,127 @@
 {
     "test_type": "snapshot",
-    "last_updated": "2026-02-11T21:00:00+09:00",
-    "tool": "Jest Snapshot",
+    "last_updated": "2026-02-12T12:30:00+09:00",
+    "tool": "Vitest",
     "files": [
         {
-            "component": "Button",
-            "path": "src/components/Button.tsx",
-            "snapshot_file": "__snapshots__/Button.snap",
+            "component": "TestTypeNav",
+            "path": "src/components/TestTypeNav.tsx",
+            "snapshot_file": "src/components/__snapshots__/TestTypeNav.snap",
             "variants": [
                 {
-                    "name": "default",
-                    "viewpoint": "デフォルト状態のDOM構造",
-                    "expected": "標準サイズ・プライマリカラーでレンダリング",
+                    "name": "デフォルト描画",
+                    "viewpoint": "初期レンダリングの構造一致",
+                    "expected": "5タブ + Overview + History のDOM構造がスナップショットと一致",
                     "status": "passed"
                 },
                 {
-                    "name": "disabled",
-                    "viewpoint": "非活性状態のDOM構造",
-                    "expected": "opacity低下、クリック不可のaria属性が付与",
-                    "status": "passed"
-                },
-                {
-                    "name": "loading",
-                    "viewpoint": "ローディング状態のDOM構造",
-                    "expected": "スピナーアイコンが表示され、テキストは非表示",
-                    "status": "changed",
-                    "diff_lines": 3
-                }
-            ]
-        },
-        {
-            "component": "Modal",
-            "path": "src/components/Modal.tsx",
-            "snapshot_file": "__snapshots__/Modal.snap",
-            "variants": [
-                {
-                    "name": "open",
-                    "viewpoint": "開いた状態のDOM構造",
-                    "expected": "オーバーレイ+コンテンツが描画される",
-                    "status": "passed"
-                },
-                {
-                    "name": "with-footer",
-                    "viewpoint": "フッター付きモーダル",
-                    "expected": "フッター領域にアクションボタンが描画される",
+                    "name": "全タブ表示（enabledTypes指定なし）",
+                    "viewpoint": "フィルタなし時の完全描画",
+                    "expected": "14タブ全てが描画される",
                     "status": "passed"
                 }
             ]
         },
         {
-            "component": "Card",
-            "path": "src/components/Card.tsx",
+            "component": "MetricsBar",
+            "path": "src/components/MetricsBar.tsx",
+            "snapshot_file": "src/components/__snapshots__/MetricsBar.snap",
+            "variants": [
+                {
+                    "name": "通常描画",
+                    "viewpoint": "メトリクスカードの構造",
+                    "expected": "作成率・消化率・合格率の3カードが描画される",
+                    "status": "passed"
+                },
+                {
+                    "name": "全値0%の場合",
+                    "viewpoint": "ゼロ値での表示",
+                    "expected": "0.0%が表示され、バーは幅0",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "component": "HistoryView",
+            "path": "src/components/HistoryView.tsx",
+            "snapshot_file": "src/components/__snapshots__/HistoryView.snap",
+            "variants": [
+                {
+                    "name": "タイムライン描画",
+                    "viewpoint": "実行履歴のリスト構造",
+                    "expected": "各ランが時系列で描画され、triggerバッジが含まれる",
+                    "status": "passed"
+                },
+                {
+                    "name": "テスト形式別鮮度",
+                    "viewpoint": "鮮度インジケーターの描画",
+                    "expected": "fresh/stale/oldの色分けが正しいDOM属性で出力",
+                    "status": "failed",
+                    "diff_lines": 12
+                }
+            ]
+        },
+        {
+            "component": "UnitView",
+            "path": "src/components/types/UnitView.tsx",
+            "snapshot_file": "src/components/types/__snapshots__/UnitView.snap",
+            "variants": [
+                {
+                    "name": "ファイルリスト描画",
+                    "viewpoint": "テーブル構造のスナップショット",
+                    "expected": "ファイル一覧テーブルが正しいカラム構造で描画",
+                    "status": "passed"
+                },
+                {
+                    "name": "展開状態",
+                    "viewpoint": "アコーディオン展開時のDOM",
+                    "expected": "テスト詳細行が追加されたDOM構造",
+                    "status": "untested"
+                }
+            ]
+        },
+        {
+            "component": "E2EView",
+            "path": "src/components/types/E2EView.tsx",
             "snapshot_file": null,
-            "variants": []
-        },
-        {
-            "component": "Navbar",
-            "path": "src/components/Navbar.tsx",
-            "snapshot_file": "__snapshots__/Navbar.snap",
             "variants": [
                 {
-                    "name": "logged-in",
-                    "viewpoint": "ログイン済みナビゲーション",
-                    "expected": "ユーザーアバターとログアウトボタンが表示",
-                    "status": "passed"
+                    "name": "シナリオリスト",
+                    "viewpoint": "シナリオ一覧の描画構造",
+                    "expected": "各シナリオがカード形式で描画、ステップ展開可能",
+                    "status": "untested"
                 },
                 {
-                    "name": "logged-out",
-                    "viewpoint": "未ログインナビゲーション",
-                    "expected": "ログイン・新規登録ボタンが表示",
-                    "status": "passed"
-                },
+                    "name": "ステップ展開",
+                    "viewpoint": "展開時のステップタイムライン",
+                    "expected": "ステップが番号付きで描画される",
+                    "status": "untested"
+                }
+            ]
+        },
+        {
+            "component": "I18nView",
+            "path": "src/components/types/I18nView.tsx",
+            "snapshot_file": null,
+            "variants": [
                 {
-                    "name": "mobile",
-                    "viewpoint": "モバイル幅のハンバーガーメニュー",
-                    "expected": "ハンバーガーアイコンが表示、メニューは非表示",
-                    "status": "changed",
-                    "diff_lines": 8
+                    "name": "ロケール一覧",
+                    "viewpoint": "ロケールカードの構造",
+                    "expected": "各ロケールの翻訳率とキー数が表示",
+                    "status": "untested"
+                }
+            ]
+        },
+        {
+            "component": "InfoPopover",
+            "path": "src/components/InfoPopover.tsx",
+            "snapshot_file": "src/components/__snapshots__/InfoPopover.snap",
+            "variants": [
+                {
+                    "name": "閉じた状態",
+                    "viewpoint": "アイコンのみ描画",
+                    "expected": "?アイコンのみがDOMに存在",
+                    "status": "passed"
                 }
             ]
         }

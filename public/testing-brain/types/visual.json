@@ -1,143 +1,156 @@
 {
     "test_type": "visual",
-    "last_updated": "2026-02-11T21:00:00+09:00",
+    "last_updated": "2026-02-12T12:30:00+09:00",
     "tool": "Storybook + Chromatic",
     "components": [
         {
-            "name": "Button",
-            "path": "src/components/Button.tsx",
-            "story_file": "src/components/Button.stories.tsx",
+            "name": "TestTypeNav",
+            "path": "src/components/TestTypeNav.tsx",
+            "story_file": "src/components/__stories__/TestTypeNav.stories.tsx",
             "variants": [
                 {
-                    "name": "Primary",
+                    "name": "ダーク — 5タブ表示",
                     "snapshot": true,
                     "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "last_checked": "2026-02-12T10:00:00+09:00"
                 },
                 {
-                    "name": "Secondary",
+                    "name": "ライト — 5タブ表示",
                     "snapshot": true,
                     "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "last_checked": "2026-02-12T10:00:00+09:00"
                 },
                 {
-                    "name": "Disabled",
+                    "name": "ダーク — Unit選択中",
                     "snapshot": true,
                     "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "last_checked": "2026-02-12T10:00:00+09:00"
                 },
                 {
-                    "name": "Loading",
+                    "name": "ライト — Unit選択中",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-12T10:00:00+09:00"
+                }
+            ]
+        },
+        {
+            "name": "MetricsBar",
+            "path": "src/components/MetricsBar.tsx",
+            "story_file": "src/components/__stories__/MetricsBar.stories.tsx",
+            "variants": [
+                {
+                    "name": "ダーク — 高スコア（80%+）",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-12T10:00:00+09:00"
+                },
+                {
+                    "name": "ダーク — 低スコア（30%以下）",
                     "snapshot": true,
                     "status": "changed",
-                    "last_checked": "2026-02-11T20:00:00+09:00",
-                    "diff_percent": 3.2
-                }
-            ]
-        },
-        {
-            "name": "Input",
-            "path": "src/components/Input.tsx",
-            "story_file": "src/components/Input.stories.tsx",
-            "variants": [
-                {
-                    "name": "Default",
-                    "snapshot": true,
-                    "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "last_checked": "2026-02-12T10:00:00+09:00",
+                    "diff_percent": 2.3
                 },
                 {
-                    "name": "Error",
+                    "name": "ライト — 高スコア（80%+）",
                     "snapshot": true,
                     "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "last_checked": "2026-02-12T10:00:00+09:00"
                 },
                 {
-                    "name": "Disabled",
-                    "snapshot": true,
-                    "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
-                }
-            ]
-        },
-        {
-            "name": "Modal",
-            "path": "src/components/Modal.tsx",
-            "story_file": "src/components/Modal.stories.tsx",
-            "variants": [
-                {
-                    "name": "Default",
-                    "snapshot": true,
-                    "status": "passed",
-                    "last_checked": "2026-02-11T19:00:00+09:00"
-                },
-                {
-                    "name": "WithForm",
+                    "name": "ライト — 低スコア（30%以下）",
                     "snapshot": true,
                     "status": "changed",
-                    "last_checked": "2026-02-11T19:00:00+09:00",
-                    "diff_percent": 12.5
+                    "last_checked": "2026-02-12T10:00:00+09:00",
+                    "diff_percent": 1.8
                 }
             ]
         },
         {
-            "name": "Card",
-            "path": "src/components/Card.tsx",
-            "story_file": null,
-            "variants": []
-        },
-        {
-            "name": "Navbar",
-            "path": "src/components/Navbar.tsx",
-            "story_file": "src/components/Navbar.stories.tsx",
+            "name": "OverviewDashboard",
+            "path": "src/App.tsx",
+            "story_file": "src/__stories__/OverviewDashboard.stories.tsx",
             "variants": [
                 {
-                    "name": "LoggedIn",
+                    "name": "ダーク — 全体像",
                     "snapshot": true,
                     "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "last_checked": "2026-02-11T22:00:00+09:00"
                 },
                 {
-                    "name": "LoggedOut",
+                    "name": "ライト — 全体像",
                     "snapshot": true,
                     "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "last_checked": "2026-02-11T22:00:00+09:00"
                 },
                 {
-                    "name": "Mobile",
+                    "name": "ダーク — 日本語",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T22:00:00+09:00"
+                },
+                {
+                    "name": "ライト — 英語",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T22:00:00+09:00"
+                }
+            ]
+        },
+        {
+            "name": "InfoPopover",
+            "path": "src/components/InfoPopover.tsx",
+            "story_file": "src/components/__stories__/InfoPopover.stories.tsx",
+            "variants": [
+                {
+                    "name": "ダーク — 閉じた状態",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-12T10:00:00+09:00"
+                },
+                {
+                    "name": "ダーク — 開いた状態",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-12T10:00:00+09:00"
+                },
+                {
+                    "name": "ライト — 開いた状態",
+                    "snapshot": false,
+                    "status": "no_snapshot"
+                },
+                {
+                    "name": "ライト — 閉じた状態",
                     "snapshot": false,
                     "status": "no_snapshot"
                 }
             ]
         },
         {
-            "name": "Sidebar",
-            "path": "src/components/Sidebar.tsx",
+            "name": "HistoryView",
+            "path": "src/components/HistoryView.tsx",
             "story_file": null,
-            "variants": []
-        },
-        {
-            "name": "Table",
-            "path": "src/components/Table.tsx",
-            "story_file": "src/components/Table.stories.tsx",
             "variants": [
                 {
-                    "name": "Default",
-                    "snapshot": true,
-                    "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "name": "ダーク — タイムライン表示",
+                    "snapshot": false,
+                    "status": "no_snapshot"
                 },
                 {
-                    "name": "Empty",
-                    "snapshot": true,
-                    "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "name": "ライト — タイムライン表示",
+                    "snapshot": false,
+                    "status": "no_snapshot"
                 },
                 {
-                    "name": "Loading",
-                    "snapshot": true,
-                    "status": "passed",
-                    "last_checked": "2026-02-11T20:00:00+09:00"
+                    "name": "ダーク — テスト形式別鮮度",
+                    "snapshot": false,
+                    "status": "no_snapshot"
+                },
+                {
+                    "name": "ライト — テスト形式別鮮度",
+                    "snapshot": false,
+                    "status": "no_snapshot"
                 }
             ]
         }

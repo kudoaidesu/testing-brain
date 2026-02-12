@@ -1,25 +1,46 @@
 {
     "test_type": "i18n",
-    "last_updated": "2026-02-11T21:00:00+09:00",
+    "last_updated": "2026-02-12T12:30:00+09:00",
     "locales": [
         {
             "code": "ja",
             "name": "日本語",
-            "total_keys": 150,
-            "translated": 150,
+            "total_keys": 120,
+            "translated": 120,
             "missing": 0,
             "pages": [
                 {
-                    "name": "ログイン",
-                    "viewpoint": "ログイン画面の日本語表示",
-                    "expected": "全ラベル・プレースホルダー・エラーメッセージが日本語",
+                    "name": "全体像 (Overview)",
+                    "viewpoint": "Overview画面の全ラベルが日本語化されている",
+                    "expected": "テスト総数、作成率、消化率、合格率、テスト形式名が全て日本語で表示",
                     "status": "passed",
                     "issues": []
                 },
                 {
-                    "name": "ダッシュボード",
-                    "viewpoint": "ダッシュボードの日本語表示",
-                    "expected": "グラフラベル・ツールチップ含め全日本語",
+                    "name": "Unit詳細",
+                    "viewpoint": "Unit画面のカバレッジ・テーブルヘッダが日本語化されている",
+                    "expected": "行、分岐、関数、文、ファイル、テスト数、状態が日本語表示",
+                    "status": "passed",
+                    "issues": []
+                },
+                {
+                    "name": "E2E詳細",
+                    "viewpoint": "E2E画面のシナリオ・ステップラベルが日本語化されている",
+                    "expected": "シナリオ、ステップ、実行時間が日本語表示",
+                    "status": "passed",
+                    "issues": []
+                },
+                {
+                    "name": "履歴 (History)",
+                    "viewpoint": "History画面のタイムライン・鮮度ラベルが日本語化されている",
+                    "expected": "タイムライン、トリガー（CI/手動/定期）、鮮度表示が日本語",
+                    "status": "passed",
+                    "issues": []
+                },
+                {
+                    "name": "ヘッダー・ナビ",
+                    "viewpoint": "ヘッダーとナビゲーションの全テキストが日本語",
+                    "expected": "Testing Brain、テスト、網羅率、合格、更新のラベルが全て日本語",
                     "status": "passed",
                     "issues": []
                 }
@@ -28,56 +49,55 @@
         {
             "code": "en",
             "name": "English",
-            "total_keys": 150,
-            "translated": 148,
+            "total_keys": 120,
+            "translated": 118,
             "missing": 2,
             "pages": [
                 {
-                    "name": "Login",
-                    "viewpoint": "ログイン画面の英語表示",
-                    "expected": "全テキストが英語化され、日本語が混在しない",
+                    "name": "Overview",
+                    "viewpoint": "Overview screen labels are fully translated to English",
+                    "expected": "Total Tests, Creation Rate, Execution Rate, Pass Rate displayed in English",
                     "status": "passed",
                     "issues": []
                 },
                 {
-                    "name": "Dashboard",
-                    "viewpoint": "ダッシュボードの英語表示",
-                    "expected": "全テキストが英語化される",
-                    "status": "failed",
-                    "issues": [
-                        {
-                            "type": "未翻訳",
-                            "description": "「お知らせ」が翻訳されていない",
-                            "element": "#notification-title"
-                        },
-                        {
-                            "type": "レイアウト崩れ",
-                            "description": "長い英語テキストでボタンがはみ出す",
-                            "element": ".action-btn"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "code": "zh",
-            "name": "中文",
-            "total_keys": 150,
-            "translated": 120,
-            "missing": 30,
-            "pages": [
+                    "name": "Unit Detail",
+                    "viewpoint": "Unit screen coverage and table headers in English",
+                    "expected": "Line, Branch, Function, Statement, File, Tests, Status in English",
+                    "status": "passed",
+                    "issues": []
+                },
                 {
-                    "name": "登录",
-                    "viewpoint": "ログイン画面の中国語表示",
-                    "expected": "全ラベルが中国語化される",
+                    "name": "E2E Detail",
+                    "viewpoint": "E2E screen scenario and step labels in English",
+                    "expected": "Scenario, Steps, Duration displayed in English",
+                    "status": "passed",
+                    "issues": []
+                },
+                {
+                    "name": "History",
+                    "viewpoint": "History screen timeline and freshness labels in English",
+                    "expected": "Timeline, trigger badges (CI/Manual/Scheduled), freshness in English",
                     "status": "partial",
                     "issues": [
                         {
-                            "type": "未翻訳",
-                            "description": "パスワードリセットリンクが日本語のまま",
-                            "element": "#reset-link"
+                            "type": "missing_key",
+                            "description": "'history.freshness.unknown' キーが英語辞書に未登録",
+                            "element": "HistoryView freshness indicator"
+                        },
+                        {
+                            "type": "missing_key",
+                            "description": "'history.noData' キーが英語辞書に未登録",
+                            "element": "HistoryView empty state"
                         }
                     ]
+                },
+                {
+                    "name": "Header & Nav",
+                    "viewpoint": "Header and navigation texts fully in English",
+                    "expected": "Testing Brain, tests, Coverage, Pass, Updated labels in English",
+                    "status": "passed",
+                    "issues": []
                 }
             ]
         }

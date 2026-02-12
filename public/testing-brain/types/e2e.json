@@ -1,201 +1,195 @@
 {
     "test_type": "e2e",
-    "last_updated": "2026-02-11T21:00:00+09:00",
+    "last_updated": "2026-02-12T12:30:00+09:00",
     "tool": "Playwright",
     "scenarios": [
         {
-            "id": "SC-001",
-            "name": "ユーザー登録→ログイン→ダッシュボード表示",
-            "viewpoint": "新規ユーザーの初回利用フロー全体",
-            "expected": "登録→ログイン→ダッシュボードの一連の操作が完了し、ウェルカムメッセージが表示される",
-            "test_file": "e2e/auth-flow.spec.ts",
+            "id": "e2e-001",
+            "name": "全体像タブから各テスト形式タブへの遷移",
+            "viewpoint": "タブナビゲーションの動作確認",
+            "expected": "Overviewから各タブクリックで対応する詳細ビューが表示される。戻りも正常に動作する。",
+            "test_file": "e2e/navigation.spec.ts",
             "status": "passed",
-            "duration_ms": 8500,
+            "duration_ms": 4500,
             "steps": [
                 {
                     "order": 1,
-                    "action": "トップページにアクセス",
+                    "action": "localhost:5173 を開く",
                     "status": "passed"
                 },
                 {
                     "order": 2,
-                    "action": "「新規登録」ボタンをクリック",
+                    "action": "Overview タブがアクティブであることを確認",
                     "status": "passed"
                 },
                 {
                     "order": 3,
-                    "action": "メールアドレス・パスワードを入力",
+                    "action": "Unit タブをクリック",
                     "status": "passed"
                 },
                 {
                     "order": 4,
-                    "action": "送信ボタンをクリック",
+                    "action": "UnitView のカバレッジサマリが表示されること",
                     "status": "passed"
                 },
                 {
                     "order": 5,
-                    "action": "ログインフォームにリダイレクト",
-                    "status": "passed"
-                },
-                {
-                    "order": 6,
-                    "action": "登録した情報でログイン",
-                    "status": "passed"
-                },
-                {
-                    "order": 7,
-                    "action": "ダッシュボードが表示される",
+                    "action": "Overview に戻る",
                     "status": "passed"
                 }
             ]
         },
         {
-            "id": "SC-002",
-            "name": "プロフィール編集→保存→反映確認",
-            "viewpoint": "ユーザープロフィールの更新永続化",
-            "expected": "変更した内容がリロード後も保持され、表示に反映される",
-            "test_file": "e2e/profile-edit.spec.ts",
+            "id": "e2e-002",
+            "name": "ダーク/ライトテーマ切替",
+            "viewpoint": "テーマ切替の視覚的整合性",
+            "expected": "テーマボタン押下でダーク/ライト切替。全コンポーネントの色・コントラストが適切に変わる。",
+            "test_file": "e2e/theme.spec.ts",
             "status": "passed",
-            "duration_ms": 5200,
+            "duration_ms": 3200,
             "steps": [
                 {
                     "order": 1,
-                    "action": "ログイン済み状態でプロフィールページへ遷移",
+                    "action": "ダークモードが初期状態であること",
                     "status": "passed"
                 },
                 {
                     "order": 2,
-                    "action": "名前フィールドを変更",
+                    "action": "テーマ切替ボタンをクリック",
                     "status": "passed"
                 },
                 {
                     "order": 3,
-                    "action": "保存ボタンをクリック",
+                    "action": "ライトモードに切り替わること（背景色が #ffffff 系に変化）",
                     "status": "passed"
                 },
                 {
                     "order": 4,
-                    "action": "成功メッセージが表示される",
-                    "status": "passed"
-                },
-                {
-                    "order": 5,
-                    "action": "ページリロード後も変更が反映されている",
+                    "action": "再度クリックでダークモードに戻ること",
                     "status": "passed"
                 }
             ]
         },
         {
-            "id": "SC-003",
-            "name": "検索→フィルタ→結果表示→詳細遷移",
-            "viewpoint": "検索機能の複合フロー（検索→フィルタリング→詳細閲覧）",
-            "expected": "検索結果が表示され、フィルタ適用後に結果が絞り込まれ、詳細ページに遷移できる",
-            "test_file": "e2e/search-flow.spec.ts",
-            "status": "failed",
-            "duration_ms": 12000,
+            "id": "e2e-003",
+            "name": "言語切替（JA ↔ EN）",
+            "viewpoint": "i18n切替の完全性",
+            "expected": "言語ボタン押下で全テキストがJA/ENに切り替わる。未翻訳キーがないこと。",
+            "test_file": "e2e/language.spec.ts",
+            "status": "passed",
+            "duration_ms": 5800,
             "steps": [
                 {
                     "order": 1,
-                    "action": "検索バーにキーワードを入力",
+                    "action": "日本語モードでヘッダータイトルを確認",
                     "status": "passed"
                 },
                 {
                     "order": 2,
-                    "action": "検索結果一覧が表示される",
+                    "action": "言語切替ボタンをクリック",
                     "status": "passed"
                 },
                 {
                     "order": 3,
-                    "action": "カテゴリフィルタを適用",
+                    "action": "Overview 各ラベルが英語に変わること",
                     "status": "passed"
                 },
                 {
                     "order": 4,
-                    "action": "結果が絞り込まれる",
-                    "status": "failed",
-                    "error": "Timeout: フィルタ結果の更新が30秒以内に完了しなかった"
+                    "action": "Unit タブに移動し英語UIを確認",
+                    "status": "passed"
                 },
                 {
                     "order": 5,
-                    "action": "結果の1件目をクリック",
-                    "status": "skipped"
-                },
-                {
-                    "order": 6,
-                    "action": "詳細ページが表示される",
-                    "status": "skipped"
+                    "action": "再度切替で日本語に戻ること",
+                    "status": "passed"
                 }
             ]
         },
         {
-            "id": "SC-004",
-            "name": "パスワードリセットフロー",
-            "viewpoint": "パスワード忘れ→リセット→再ログインの一連のフロー",
-            "expected": "リセットメールのリンクから新パスワードを設定し、そのパスワードでログインできる",
+            "id": "e2e-004",
+            "name": "レスポンシブ — モバイル幅での表示",
+            "viewpoint": "狭幅でのレイアウト崩れ防止",
+            "expected": "375px幅でヘッダー・タブ・テーブルが横スクロール可能で操作できること。",
+            "test_file": "e2e/responsive.spec.ts",
+            "status": "passed",
+            "duration_ms": 6200,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "ビューポートを375px幅に設定",
+                    "status": "passed"
+                },
+                {
+                    "order": 2,
+                    "action": "ヘッダーが折り返し表示されること",
+                    "status": "passed"
+                },
+                {
+                    "order": 3,
+                    "action": "タブバーが横スクロール可能であること",
+                    "status": "passed"
+                },
+                {
+                    "order": 4,
+                    "action": "Unit詳細テーブルが横スクロール可能であること",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "id": "e2e-005",
+            "name": "有効タブのみ表示（非対象タブの非表示確認）",
+            "viewpoint": "enabled_typesのフィルタリング動作",
+            "expected": "config.jsonのenabled_types以外のタブがナビゲーションに表示されないこと。",
             "test_file": null,
             "status": "untested",
             "duration_ms": null,
-            "steps": [
-                {
-                    "order": 1,
-                    "action": "「パスワードを忘れた」リンクをクリック",
-                    "status": "untested"
-                },
-                {
-                    "order": 2,
-                    "action": "メールアドレスを入力して送信",
-                    "status": "untested"
-                },
-                {
-                    "order": 3,
-                    "action": "リセットメールのリンクをクリック",
-                    "status": "untested"
-                },
-                {
-                    "order": 4,
-                    "action": "新パスワードを設定",
-                    "status": "untested"
-                },
-                {
-                    "order": 5,
-                    "action": "新パスワードでログインできる",
-                    "status": "untested"
-                }
-            ]
+            "steps": []
         },
         {
-            "id": "SC-005",
-            "name": "ダッシュボード→設定変更→ログアウト",
-            "viewpoint": "設定変更とセッション終了の正常フロー",
-            "expected": "設定変更が保存され、ログアウト後にログインページにリダイレクトされる",
+            "id": "e2e-006",
+            "name": "Unit詳細のアコーディオン展開",
+            "viewpoint": "ファイル行のインタラクション",
+            "expected": "ファイル行クリックでテスト一覧が展開され、再クリックで閉じること。エラー表示も赤ブロックで表示。",
             "test_file": null,
             "status": "untested",
             "duration_ms": null,
+            "steps": []
+        },
+        {
+            "id": "e2e-007",
+            "name": "データのライブ更新（ポーリング）確認",
+            "viewpoint": "3秒間隔のデータ自動更新",
+            "expected": "JSONを手動更新後、3秒以内にUIに反映されること。",
+            "test_file": null,
+            "status": "untested",
+            "duration_ms": null,
+            "steps": []
+        },
+        {
+            "id": "e2e-008",
+            "name": "履歴タブのタイムライン表示",
+            "viewpoint": "実行履歴の時系列表示",
+            "expected": "Historyタブで実行履歴が時系列で表示され、各ランのサマリが正しく表示される。",
+            "test_file": "e2e/history.spec.ts",
+            "status": "passed",
+            "duration_ms": 3500,
             "steps": [
                 {
                     "order": 1,
-                    "action": "ダッシュボードにアクセス",
-                    "status": "untested"
+                    "action": "History タブをクリック",
+                    "status": "passed"
                 },
                 {
                     "order": 2,
-                    "action": "設定メニューを開く",
-                    "status": "untested"
+                    "action": "タイムラインが降順で表示されること",
+                    "status": "passed"
                 },
                 {
                     "order": 3,
-                    "action": "通知設定を変更して保存",
-                    "status": "untested"
-                },
-                {
-                    "order": 4,
-                    "action": "ログアウトボタンをクリック",
-                    "status": "untested"
-                },
-                {
-                    "order": 5,
-                    "action": "ログインページにリダイレクトされる",
-                    "status": "untested"
+                    "action": "各ランにtriggerバッジ（CI/手動/定期）が表示されること",
+                    "status": "passed"
                 }
             ]
         }

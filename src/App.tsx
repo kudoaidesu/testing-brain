@@ -17,9 +17,12 @@ import { SmokeView } from './components/types/SmokeView';
 import { LoadView } from './components/types/LoadView';
 import { SnapshotView } from './components/types/SnapshotView';
 import { I18nView } from './components/types/I18nView';
+import { ComponentView } from './components/types/ComponentView';
+import { PageView } from './components/types/PageView';
 import { HistoryView, getFreshness, freshnessColor, formatRelativeTime } from './components/HistoryView';
 import { useLanguage } from './i18n/i18n';
 import type { TestType, TestTypeData } from './types/brain';
+
 
 type ViewType = TestType | 'overview' | 'history';
 
@@ -95,7 +98,10 @@ export default function App() {
 
     useEffect(() => {
         if (activeType !== 'overview' && activeType !== 'history' && state) {
-            fetchTypeData(activeType as TestType);
+            // Prevent infinite loop: only fetch if data is missing
+            if (!state.typeData[activeType as TestType]) {
+                fetchTypeData(activeType as TestType);
+            }
         }
     }, [activeType, state]);
 
@@ -232,6 +238,8 @@ export default function App() {
 // --- 全体像ダッシュボード ---
 
 function OverviewDashboard({ progress, history, enabledTypes }: { progress: import('./types/brain').Progress; history: import('./types/brain').ExecutionHistory | null; enabledTypes?: TestType[] }) {
+    if (!progress?.by_test_type) return null;
+
     const allTypes = Object.entries(progress.by_test_type) as [TestType, import('./types/brain').TestTypeProgress][];
     const types = enabledTypes ? allTypes.filter(([type]) => enabledTypes.includes(type)) : allTypes;
     const { t } = useLanguage();
@@ -290,7 +298,7 @@ function OverviewDashboard({ progress, history, enabledTypes }: { progress: impo
                                 </td>
                                 <td className="text-right px-3 py-3">
                                     {(() => {
-                                        const typeSummary = history?.by_type[type];
+                                        const typeSummary = history?.by_type?.[type];
                                         if (!typeSummary) return <span className="text-xs" style={{ color: 'var(--fg-muted)' }}>—</span>;
                                         const freshness = getFreshness(typeSummary.last_run);
                                         return (
@@ -346,7 +354,17 @@ function TypeDetailView({ type, progress, data, history }: {
     history: import('./types/brain').ExecutionHistory | null;
 }) {
     const { t } = useLanguage();
-    const typeSummary = history?.by_type[type];
+
+    // Safety check for missing progress data
+    if (!progress) {
+        return (
+            <div className="py-8 text-center text-sm" style={{ color: 'var(--fg-muted)' }}>
+                {t('common.noData')}
+            </div>
+        );
+    }
+
+    const typeSummary = history?.by_type?.[type];
 
     return (
         <div>
@@ -401,6 +419,8 @@ function TypeContent({ type, data }: { type: TestType; data: TestTypeData }) {
         case 'load': return <LoadView data={data as import('./types/brain').LoadData} />;
         case 'snapshot': return <SnapshotView data={data as import('./types/brain').SnapshotData} />;
         case 'i18n': return <I18nView data={data as import('./types/brain').I18nData} />;
+        case 'component': return <ComponentView data={data as import('./types/brain').ComponentData} />;
+        case 'page': return <PageView data={data as import('./types/brain').PageData} />;
         default: return <div style={{ color: 'var(--fg-muted)' }}>Unknown</div>;
     }
 }

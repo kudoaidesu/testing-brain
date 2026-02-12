@@ -1,6 +1,6 @@
 // TypeScript型定義 - testing-brain のJSONスキーマに対応
 
-export type TestType = 'unit' | 'integration' | 'e2e' | 'api' | 'visual' | 'accessibility' | 'performance' | 'security' | 'contract' | 'mutation' | 'smoke' | 'load' | 'snapshot' | 'i18n';
+export type TestType = 'unit' | 'integration' | 'e2e' | 'api' | 'visual' | 'accessibility' | 'performance' | 'security' | 'contract' | 'mutation' | 'smoke' | 'load' | 'snapshot' | 'i18n' | 'component' | 'page';
 
 export type TestStatus = 'passed' | 'failed' | 'untested' | 'partial' | 'skipped';
 
@@ -398,7 +398,46 @@ export interface I18nData {
     locales: I18nLocale[];
 }
 
-// --- Execution History ---
+// --- Component ---
+
+export interface ComponentItem {
+    name: string;
+    description: string;
+    path: string;
+    status: TestStatus;
+    stories_total: number;
+    tests_total: number;
+}
+
+export interface ComponentData {
+    test_type: 'component';
+    last_updated: string;
+    components: ComponentItem[];
+}
+
+// --- Page ---
+
+export interface PageItem {
+    route: string;
+    file: string;
+    status: TestStatus;
+    tests: { name: string; status: TestStatus }[];
+}
+
+export interface PageData {
+    test_type: 'page';
+    last_updated: string;
+    pages: PageItem[];
+}
+
+// --- Execution History --- (unchanged)
+
+// ...
+
+// --- BrainState (全体) ---
+
+export type TestTypeData = UnitData | IntegrationData | E2EData | ApiData | VisualData | AccessibilityData | PerformanceData | SecurityData | ContractData | MutationData | SmokeData | LoadData | SnapshotData | I18nData | ComponentData | PageData;
+
 
 export interface ExecutionRun {
     id: string;
@@ -444,8 +483,6 @@ export interface BrainConfig {
 }
 
 // --- BrainState (全体) ---
-
-export type TestTypeData = UnitData | IntegrationData | E2EData | ApiData | VisualData | AccessibilityData | PerformanceData | SecurityData | ContractData | MutationData | SmokeData | LoadData | SnapshotData | I18nData;
 
 export interface BrainState {
     progress: Progress;

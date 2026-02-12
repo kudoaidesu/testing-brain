@@ -9,7 +9,7 @@ export class TestingBrainPanelProvider implements vscode.WebviewViewProvider {
     private watcher?: vscode.FileSystemWatcher;
     private ready = false;
 
-    constructor(private readonly extensionUri: vscode.Uri) { }
+    constructor(private readonly extensionUri: vscode.Uri, private readonly outputChannel: vscode.OutputChannel) { }
 
     resolveWebviewView(
         webviewView: vscode.WebviewView,
@@ -29,6 +29,7 @@ export class TestingBrainPanelProvider implements vscode.WebviewViewProvider {
 
         // Listen for messages from the webview
         webviewView.webview.onDidReceiveMessage(async (message) => {
+            this.outputChannel.appendLine(`[Panel] Received message: ${message.type}`);
             switch (message.type) {
                 case 'ready':
                     this.ready = true;
@@ -51,9 +52,10 @@ export class TestingBrainPanelProvider implements vscode.WebviewViewProvider {
         const folders = vscode.workspace.workspaceFolders;
         if (!folders) return;
 
-        this.watcher = vscode.workspace.createFileSystemWatcher(
-            new vscode.RelativePattern(folders[0], 'testing-brain/**/*.json')
+        const watcher = vscode.workspace.createFileSystemWatcher(
+            new vscode.RelativePattern(folders[0], '{.testing-brain,testing-brain,public/testing-brain}/**/*.json')
         );
+        this.watcher = watcher;
 
         const reload = () => this.loadAndSendData();
         this.watcher.onDidChange(reload);
@@ -61,21 +63,54 @@ export class TestingBrainPanelProvider implements vscode.WebviewViewProvider {
         this.watcher.onDidDelete(reload);
     }
 
+    private async resolveBaseUri(folder: vscode.Uri): Promise<vscode.Uri | null> {
+        const candidates = ['.testing-brain', 'testing-brain', 'public/testing-brain'];
+        for (const c of candidates) {
+            const uri = vscode.Uri.joinPath(folder, c);
+            this.outputChannel.appendLine(`[Panel] Checking candidate path: ${uri.fsPath}`);
+            try {
+                const stat = await vscode.workspace.fs.stat(uri);
+                if (stat.type === vscode.FileType.Directory) {
+                    try {
+                        await vscode.workspace.fs.stat(vscode.Uri.joinPath(uri, 'progress.json'));
+                        this.outputChannel.appendLine(`[Panel] Found valid data directory: ${uri.fsPath}`);
+                        return uri;
+                    } catch {
+                        this.outputChannel.appendLine(`[Panel] progress.json not found in ${uri.fsPath}`);
+                    }
+                }
+            } catch {
+                // ignore
+            }
+        }
+        this.outputChannel.appendLine('[Panel] No valid data directory found');
+        return null;
+    }
+
     private async loadAndSendData() {
         if (!this.view || !this.ready) return;
 
         const folders = vscode.workspace.workspaceFolders;
-        if (!folders) return;
+        if (!folders) {
+            this.outputChannel.appendLine('[Panel] No workspace folders');
+            return;
+        }
 
-        const baseUri = vscode.Uri.joinPath(folders[0].uri, 'testing-brain');
+        const baseUri = await this.resolveBaseUri(folders[0].uri);
+        if (!baseUri) return;
 
         try {
+            this.outputChannel.appendLine('[Panel] Loading data files...');
             const progressData = await readJsonFile(vscode.Uri.joinPath(baseUri, 'progress.json'));
-            if (!progressData) return;
+            if (!progressData) {
+                this.outputChannel.appendLine('[Panel] Failed to load progress.json');
+                return;
+            }
 
             const historyData = await readJsonFile(vscode.Uri.joinPath(baseUri, 'execution_history.json'));
             const configData = await readJsonFile(vscode.Uri.joinPath(baseUri, 'config.json'));
 
+            this.outputChannel.appendLine('[Panel] Sending brainState to webview');
             this.view.webview.postMessage({
                 type: 'brainState',
                 data: {
@@ -86,7 +121,7 @@ export class TestingBrainPanelProvider implements vscode.WebviewViewProvider {
                 },
             });
         } catch (err) {
-            console.error('Error loading brain data:', err);
+            this.outputChannel.appendLine(`[Panel] Error loading data: ${err}`);
         }
     }
 
@@ -96,7 +131,10 @@ export class TestingBrainPanelProvider implements vscode.WebviewViewProvider {
         const folders = vscode.workspace.workspaceFolders;
         if (!folders) return;
 
-        const uri = vscode.Uri.joinPath(folders[0].uri, 'testing-brain', 'types', `${type}.json`);
+        const baseUri = await this.resolveBaseUri(folders[0].uri);
+        if (!baseUri) return;
+
+        const uri = vscode.Uri.joinPath(baseUri, 'types', `${type}.json`);
         const data = await readJsonFile(uri);
 
         if (data) {

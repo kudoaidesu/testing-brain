@@ -245,6 +245,38 @@ const data: Record<TestType, LocalizedInfo> = {
             tools: ['i18next', 'react-intl', 'Custom Linter'],
         },
     },
+    component: {
+        ja: {
+            name: 'コンポーネントテスト',
+            description: 'UIコンポーネントの振る舞い（Props、イベント、状態）を検証します。',
+            purpose: 'UIロジックとインタラクションの正確性を保証します。',
+            targetValue: '主要コンポーネントのカバレッジ 100%。ストーリー数 >= バリアント数。',
+            tools: ['React Testing Library', 'Storybook', 'Cypress Component Testing'],
+        },
+        en: {
+            name: 'Component Tests',
+            description: 'Verifies UI component behavior (Props, events, state).',
+            purpose: 'Ensures correctness of UI logic and interactions.',
+            targetValue: '100% coverage of key components. Stories >= Variants.',
+            tools: ['React Testing Library', 'Storybook', 'Cypress Component Testing'],
+        },
+    },
+    page: {
+        ja: {
+            name: 'ページテスト',
+            description: 'ページ単位の統合（データ取得、ルーティング、SEOメタデータ）を検証します。',
+            purpose: 'ユーザーが見る実際のページ構成の正しさを保証します。',
+            targetValue: '全ルートのHTTP 200確認。クリティカルパスのレンダリング確認。',
+            tools: ['Next.js Testing', 'Playwright', 'MSW'],
+        },
+        en: {
+            name: 'Page Tests',
+            description: 'Verifies page-level integration (data fetching, routing, SEO metadata).',
+            purpose: 'Ensures correctness of actual page composition.',
+            targetValue: 'HTTP 200 for all routes. Critical path rendering verification.',
+            tools: ['Next.js Testing', 'Playwright', 'MSW'],
+        },
+    },
 };
 
 export function getTestTypeInfo(type: TestType, lang: Language): TestTypeInfo {

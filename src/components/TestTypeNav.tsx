@@ -1,4 +1,4 @@
-import { LayoutGrid, FlaskConical, Link2, Monitor, Globe, Eye, Accessibility, Gauge, Shield, FileText, Bug, Flame, Activity, Camera, Languages, Clock } from 'lucide-react';
+import { LayoutGrid, FlaskConical, Link2, Monitor, Globe, Eye, Accessibility, Gauge, Shield, FileText, Bug, Flame, Activity, Camera, Languages, Clock, Box, Layout } from 'lucide-react';
 import type { TestType, TestTypeProgress } from '../types/brain';
 import { useLanguage } from '../i18n/i18n';
 
@@ -26,18 +26,20 @@ const testTypeIcons: Record<TestType, typeof FlaskConical> = {
     load: Activity,
     snapshot: Camera,
     i18n: Languages,
+    component: Box,
+    page: Layout,
 };
 
 const testTypeOrder: TestType[] = [
-    'unit', 'integration', 'e2e', 'api', 'visual', 'accessibility',
+    'unit', 'integration', 'e2e', 'component', 'page', 'api', 'visual', 'accessibility',
     'performance', 'security', 'contract', 'mutation', 'smoke', 'load', 'snapshot', 'i18n',
 ];
 
 export function TestTypeNav({ activeType, onTypeChange, progress, enabledTypes }: TestTypeNavProps) {
     const { t } = useLanguage();
-    const visibleTypes = enabledTypes
+    const visibleTypes = (enabledTypes
         ? testTypeOrder.filter(t => enabledTypes.includes(t))
-        : testTypeOrder;
+        : testTypeOrder).filter(t => !!progress[t]);
 
     return (
         <nav className="flex items-center gap-1 overflow-x-auto pb-2 mb-4 text-sm">

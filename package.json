@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "publisher": "kudoaidesu",
     "engines": {
-        "vscode": "^1.109.0"
+        "vscode": "^1.85.0"
     },
     "categories": [
         "Testing",
@@ -61,7 +61,7 @@
         "@types/node": "^25.2.3",
         "@types/react": "^18.2.66",
         "@types/react-dom": "^18.2.22",
-        "@types/vscode": "^1.109.0",
+        "@types/vscode": "^1.85.0",
         "@types/vscode-webview": "^1.57.5",
         "@vitejs/plugin-react-swc": "^3.5.0",
         "autoprefixer": "^10.4.18",

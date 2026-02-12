@@ -1,0 +1,203 @@
+{
+    "test_type": "e2e",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "tool": "Playwright",
+    "scenarios": [
+        {
+            "id": "SC-001",
+            "name": "ユーザー登録→ログイン→ダッシュボード表示",
+            "viewpoint": "新規ユーザーの初回利用フロー全体",
+            "expected": "登録→ログイン→ダッシュボードの一連の操作が完了し、ウェルカムメッセージが表示される",
+            "test_file": "e2e/auth-flow.spec.ts",
+            "status": "passed",
+            "duration_ms": 8500,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "トップページにアクセス",
+                    "status": "passed"
+                },
+                {
+                    "order": 2,
+                    "action": "「新規登録」ボタンをクリック",
+                    "status": "passed"
+                },
+                {
+                    "order": 3,
+                    "action": "メールアドレス・パスワードを入力",
+                    "status": "passed"
+                },
+                {
+                    "order": 4,
+                    "action": "送信ボタンをクリック",
+                    "status": "passed"
+                },
+                {
+                    "order": 5,
+                    "action": "ログインフォームにリダイレクト",
+                    "status": "passed"
+                },
+                {
+                    "order": 6,
+                    "action": "登録した情報でログイン",
+                    "status": "passed"
+                },
+                {
+                    "order": 7,
+                    "action": "ダッシュボードが表示される",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "id": "SC-002",
+            "name": "プロフィール編集→保存→反映確認",
+            "viewpoint": "ユーザープロフィールの更新永続化",
+            "expected": "変更した内容がリロード後も保持され、表示に反映される",
+            "test_file": "e2e/profile-edit.spec.ts",
+            "status": "passed",
+            "duration_ms": 5200,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "ログイン済み状態でプロフィールページへ遷移",
+                    "status": "passed"
+                },
+                {
+                    "order": 2,
+                    "action": "名前フィールドを変更",
+                    "status": "passed"
+                },
+                {
+                    "order": 3,
+                    "action": "保存ボタンをクリック",
+                    "status": "passed"
+                },
+                {
+                    "order": 4,
+                    "action": "成功メッセージが表示される",
+                    "status": "passed"
+                },
+                {
+                    "order": 5,
+                    "action": "ページリロード後も変更が反映されている",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "id": "SC-003",
+            "name": "検索→フィルタ→結果表示→詳細遷移",
+            "viewpoint": "検索機能の複合フロー（検索→フィルタリング→詳細閲覧）",
+            "expected": "検索結果が表示され、フィルタ適用後に結果が絞り込まれ、詳細ページに遷移できる",
+            "test_file": "e2e/search-flow.spec.ts",
+            "status": "failed",
+            "duration_ms": 12000,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "検索バーにキーワードを入力",
+                    "status": "passed"
+                },
+                {
+                    "order": 2,
+                    "action": "検索結果一覧が表示される",
+                    "status": "passed"
+                },
+                {
+                    "order": 3,
+                    "action": "カテゴリフィルタを適用",
+                    "status": "passed"
+                },
+                {
+                    "order": 4,
+                    "action": "結果が絞り込まれる",
+                    "status": "failed",
+                    "error": "Timeout: フィルタ結果の更新が30秒以内に完了しなかった"
+                },
+                {
+                    "order": 5,
+                    "action": "結果の1件目をクリック",
+                    "status": "skipped"
+                },
+                {
+                    "order": 6,
+                    "action": "詳細ページが表示される",
+                    "status": "skipped"
+                }
+            ]
+        },
+        {
+            "id": "SC-004",
+            "name": "パスワードリセットフロー",
+            "viewpoint": "パスワード忘れ→リセット→再ログインの一連のフロー",
+            "expected": "リセットメールのリンクから新パスワードを設定し、そのパスワードでログインできる",
+            "test_file": null,
+            "status": "untested",
+            "duration_ms": null,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "「パスワードを忘れた」リンクをクリック",
+                    "status": "untested"
+                },
+                {
+                    "order": 2,
+                    "action": "メールアドレスを入力して送信",
+                    "status": "untested"
+                },
+                {
+                    "order": 3,
+                    "action": "リセットメールのリンクをクリック",
+                    "status": "untested"
+                },
+                {
+                    "order": 4,
+                    "action": "新パスワードを設定",
+                    "status": "untested"
+                },
+                {
+                    "order": 5,
+                    "action": "新パスワードでログインできる",
+                    "status": "untested"
+                }
+            ]
+        },
+        {
+            "id": "SC-005",
+            "name": "ダッシュボード→設定変更→ログアウト",
+            "viewpoint": "設定変更とセッション終了の正常フロー",
+            "expected": "設定変更が保存され、ログアウト後にログインページにリダイレクトされる",
+            "test_file": null,
+            "status": "untested",
+            "duration_ms": null,
+            "steps": [
+                {
+                    "order": 1,
+                    "action": "ダッシュボードにアクセス",
+                    "status": "untested"
+                },
+                {
+                    "order": 2,
+                    "action": "設定メニューを開く",
+                    "status": "untested"
+                },
+                {
+                    "order": 3,
+                    "action": "通知設定を変更して保存",
+                    "status": "untested"
+                },
+                {
+                    "order": 4,
+                    "action": "ログアウトボタンをクリック",
+                    "status": "untested"
+                },
+                {
+                    "order": 5,
+                    "action": "ログインページにリダイレクトされる",
+                    "status": "untested"
+                }
+            ]
+        }
+    ]
+}

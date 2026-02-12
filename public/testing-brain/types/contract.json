@@ -1,0 +1,55 @@
+{
+    "test_type": "contract",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "tool": "Pact",
+    "contracts": [
+        {
+            "consumer": "フロントエンド",
+            "provider": "ユーザーAPI",
+            "test_file": "contracts/frontend-user-api.pact.ts",
+            "status": "passed",
+            "interactions": [
+                {
+                    "name": "GET /users — ユーザー一覧取得",
+                    "viewpoint": "フロントエンドが期待するレスポンス形式の検証",
+                    "expected": "200レスポンスで配列が返り、各要素にid,name,emailが含まれる",
+                    "status": "passed"
+                },
+                {
+                    "name": "POST /users — ユーザー作成",
+                    "viewpoint": "作成時のリクエスト・レスポンス契約",
+                    "expected": "201レスポンスで作成されたユーザーが返る（idが自動採番される）",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "consumer": "フロントエンド",
+            "provider": "認証API",
+            "test_file": "contracts/frontend-auth-api.pact.ts",
+            "status": "partial",
+            "interactions": [
+                {
+                    "name": "POST /auth/login — ログイン",
+                    "viewpoint": "認証トークンのレスポンス形式",
+                    "expected": "200レスポンスでaccess_tokenとrefresh_tokenが返る",
+                    "status": "passed"
+                },
+                {
+                    "name": "POST /auth/refresh — トークンリフレッシュ",
+                    "viewpoint": "リフレッシュトークンの更新契約",
+                    "expected": "新しいaccess_tokenが返り、古いトークンは無効化される",
+                    "status": "failed",
+                    "error": "レスポンスにrefresh_tokenが含まれていない"
+                }
+            ]
+        },
+        {
+            "consumer": "通知サービス",
+            "provider": "メール送信API",
+            "test_file": null,
+            "status": "untested",
+            "interactions": []
+        }
+    ]
+}

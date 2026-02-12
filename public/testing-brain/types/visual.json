@@ -1,0 +1,145 @@
+{
+    "test_type": "visual",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "tool": "Storybook + Chromatic",
+    "components": [
+        {
+            "name": "Button",
+            "path": "src/components/Button.tsx",
+            "story_file": "src/components/Button.stories.tsx",
+            "variants": [
+                {
+                    "name": "Primary",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Secondary",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Disabled",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Loading",
+                    "snapshot": true,
+                    "status": "changed",
+                    "last_checked": "2026-02-11T20:00:00+09:00",
+                    "diff_percent": 3.2
+                }
+            ]
+        },
+        {
+            "name": "Input",
+            "path": "src/components/Input.tsx",
+            "story_file": "src/components/Input.stories.tsx",
+            "variants": [
+                {
+                    "name": "Default",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Error",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Disabled",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                }
+            ]
+        },
+        {
+            "name": "Modal",
+            "path": "src/components/Modal.tsx",
+            "story_file": "src/components/Modal.stories.tsx",
+            "variants": [
+                {
+                    "name": "Default",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T19:00:00+09:00"
+                },
+                {
+                    "name": "WithForm",
+                    "snapshot": true,
+                    "status": "changed",
+                    "last_checked": "2026-02-11T19:00:00+09:00",
+                    "diff_percent": 12.5
+                }
+            ]
+        },
+        {
+            "name": "Card",
+            "path": "src/components/Card.tsx",
+            "story_file": null,
+            "variants": []
+        },
+        {
+            "name": "Navbar",
+            "path": "src/components/Navbar.tsx",
+            "story_file": "src/components/Navbar.stories.tsx",
+            "variants": [
+                {
+                    "name": "LoggedIn",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "LoggedOut",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Mobile",
+                    "snapshot": false,
+                    "status": "no_snapshot"
+                }
+            ]
+        },
+        {
+            "name": "Sidebar",
+            "path": "src/components/Sidebar.tsx",
+            "story_file": null,
+            "variants": []
+        },
+        {
+            "name": "Table",
+            "path": "src/components/Table.tsx",
+            "story_file": "src/components/Table.stories.tsx",
+            "variants": [
+                {
+                    "name": "Default",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Empty",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                },
+                {
+                    "name": "Loading",
+                    "snapshot": true,
+                    "status": "passed",
+                    "last_checked": "2026-02-11T20:00:00+09:00"
+                }
+            ]
+        }
+    ]
+}

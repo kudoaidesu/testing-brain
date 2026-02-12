@@ -1,0 +1,48 @@
+{
+    "test_type": "smoke",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "environment": "staging",
+    "checks": [
+        {
+            "name": "トップページ表示",
+            "viewpoint": "デプロイ後の基本描画確認",
+            "expected": "200レスポンスで主要DOM要素が描画される",
+            "url": "/",
+            "status": "passed",
+            "response_ms": 120
+        },
+        {
+            "name": "ログインページ表示",
+            "viewpoint": "認証画面の到達性",
+            "expected": "ログインフォームが表示され、入力可能な状態",
+            "url": "/login",
+            "status": "passed",
+            "response_ms": 95
+        },
+        {
+            "name": "API ヘルスチェック",
+            "viewpoint": "バックエンドの生存確認",
+            "expected": "GET /health が200を返し、{status: 'ok'}を含む",
+            "url": "/api/health",
+            "status": "passed",
+            "response_ms": 45
+        },
+        {
+            "name": "ダッシュボード表示",
+            "viewpoint": "認証後のメイン画面到達性",
+            "expected": "ログイン後にダッシュボードが表示される",
+            "url": "/dashboard",
+            "status": "failed",
+            "response_ms": 5000,
+            "error": "タイムアウト: 5秒以内にレスポンスなし"
+        },
+        {
+            "name": "静的アセット配信",
+            "viewpoint": "CDN経由のアセット配信確認",
+            "expected": "main.jsとstyle.cssが200で返る",
+            "url": "/assets/main.js",
+            "status": "passed",
+            "response_ms": 30
+        }
+    ]
+}

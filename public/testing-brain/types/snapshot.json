@@ -1,0 +1,84 @@
+{
+    "test_type": "snapshot",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "tool": "Jest Snapshot",
+    "files": [
+        {
+            "component": "Button",
+            "path": "src/components/Button.tsx",
+            "snapshot_file": "__snapshots__/Button.snap",
+            "variants": [
+                {
+                    "name": "default",
+                    "viewpoint": "デフォルト状態のDOM構造",
+                    "expected": "標準サイズ・プライマリカラーでレンダリング",
+                    "status": "passed"
+                },
+                {
+                    "name": "disabled",
+                    "viewpoint": "非活性状態のDOM構造",
+                    "expected": "opacity低下、クリック不可のaria属性が付与",
+                    "status": "passed"
+                },
+                {
+                    "name": "loading",
+                    "viewpoint": "ローディング状態のDOM構造",
+                    "expected": "スピナーアイコンが表示され、テキストは非表示",
+                    "status": "changed",
+                    "diff_lines": 3
+                }
+            ]
+        },
+        {
+            "component": "Modal",
+            "path": "src/components/Modal.tsx",
+            "snapshot_file": "__snapshots__/Modal.snap",
+            "variants": [
+                {
+                    "name": "open",
+                    "viewpoint": "開いた状態のDOM構造",
+                    "expected": "オーバーレイ+コンテンツが描画される",
+                    "status": "passed"
+                },
+                {
+                    "name": "with-footer",
+                    "viewpoint": "フッター付きモーダル",
+                    "expected": "フッター領域にアクションボタンが描画される",
+                    "status": "passed"
+                }
+            ]
+        },
+        {
+            "component": "Card",
+            "path": "src/components/Card.tsx",
+            "snapshot_file": null,
+            "variants": []
+        },
+        {
+            "component": "Navbar",
+            "path": "src/components/Navbar.tsx",
+            "snapshot_file": "__snapshots__/Navbar.snap",
+            "variants": [
+                {
+                    "name": "logged-in",
+                    "viewpoint": "ログイン済みナビゲーション",
+                    "expected": "ユーザーアバターとログアウトボタンが表示",
+                    "status": "passed"
+                },
+                {
+                    "name": "logged-out",
+                    "viewpoint": "未ログインナビゲーション",
+                    "expected": "ログイン・新規登録ボタンが表示",
+                    "status": "passed"
+                },
+                {
+                    "name": "mobile",
+                    "viewpoint": "モバイル幅のハンバーガーメニュー",
+                    "expected": "ハンバーガーアイコンが表示、メニューは非表示",
+                    "status": "changed",
+                    "diff_lines": 8
+                }
+            ]
+        }
+    ]
+}

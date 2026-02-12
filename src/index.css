@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ================================================================
+   DESIGN TOKENS — Semantic color system
+   
+   All UI components reference these tokens.
+   The only difference between themes is here.
+   ================================================================ */
+
+/* ===== Dark Theme (default) ===== */
+:root {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg: #0d1117;
+  --bg-subtle: #161b22;
+  --bg-inset: #010409;
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Surfaces (cards, panels) */
+  --surface: #161b22;
+  --surface-hover: #1c2128;
+  --surface-active: #21262d;
+
+  /* Foreground (text) */
+  --fg: #e6edf3;
+  --fg-secondary: #8b949e;
+  --fg-muted: #484f58;
+  --fg-on-accent: #ffffff;
+
+  /* Borders */
+  --border: #30363d;
+  --border-subtle: #21262d;
+
+  /* Status badges — fixed across themes */
+  --badge-pass-bg: rgba(16, 185, 129, 0.15);
+  --badge-pass-text: #34d399;
+  --badge-pass-border: rgba(16, 185, 129, 0.3);
+
+  --badge-fail-bg: rgba(248, 113, 113, 0.15);
+  --badge-fail-text: #f87171;
+  --badge-fail-border: rgba(248, 113, 113, 0.3);
+
+  --badge-warn-bg: rgba(251, 191, 36, 0.15);
+  --badge-warn-text: #fbbf24;
+  --badge-warn-border: rgba(251, 191, 36, 0.3);
+
+  /* Progress bar */
+  --bar-track: #21262d;
+  --bar-created: #484f58;
+  --bar-executed: #6366f1;
+
+  /* Cards & Popover */
+  --bg-card: #1c2128;
+  --shadow: rgba(0, 0, 0, 0.4);
+
+  /* Primary accent */
+  --primary: #6366f1;
+  --primary-subtle: rgba(99, 102, 241, 0.15);
+
+  /* Gradient background glow */
+  --glow-1: rgba(99, 102, 241, 0.12);
+  --glow-2: rgba(168, 85, 247, 0.08);
+}
+
+/* ===== Light Theme ===== */
+.light {
+  color-scheme: light;
+
+  /* Backgrounds — GitHub-inspired */
+  --bg: #ffffff;
+  --bg-subtle: #f6f8fa;
+  --bg-inset: #eff2f5;
+  --bg-overlay: rgba(0, 0, 0, 0.3);
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-hover: #f3f4f6;
+  --surface-active: #ebedf0;
+
+  /* Foreground */
+  --fg: #1f2328;
+  --fg-secondary: #59636e;
+  --fg-muted: #8c959f;
+  --fg-on-accent: #ffffff;
+
+  /* Borders */
+  --border: #d1d9e0;
+  --border-subtle: #e8ecf0;
+
+  /* Status badges */
+  --badge-pass-bg: rgba(16, 185, 129, 0.1);
+  --badge-pass-text: #059669;
+  --badge-pass-border: rgba(16, 185, 129, 0.25);
+
+  --badge-fail-bg: rgba(239, 68, 68, 0.1);
+  --badge-fail-text: #dc2626;
+  --badge-fail-border: rgba(239, 68, 68, 0.25);
+
+  --badge-warn-bg: rgba(245, 158, 11, 0.1);
+  --badge-warn-text: #d97706;
+  --badge-warn-border: rgba(245, 158, 11, 0.25);
+
+  /* Progress bar */
+  --bar-track: #e5e7eb;
+  --bar-created: #d1d5db;
+  --bar-executed: #6366f1;
+
+  /* Cards & Popover */
+  --bg-card: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  /* Primary accent */
+  --primary: #6366f1;
+  --primary-subtle: rgba(99, 102, 241, 0.08);
+
+  /* Gradient background glow */
+  --glow-1: rgba(99, 102, 241, 0.06);
+  --glow-2: rgba(168, 85, 247, 0.04);
+}
+
+/* ================================================================
+   BASE STYLES
+   ================================================================ */
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(circle at 50% 0%, var(--glow-1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, var(--glow-2) 0%, transparent 50%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+code,
+pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Table cells: no wrapping — tables have horizontal scroll */
+table th,
+table td {
+  white-space: nowrap;
+}

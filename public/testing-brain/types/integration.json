@@ -1,0 +1,98 @@
+{
+    "test_type": "integration",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "modules": [
+        {
+            "name": "Auth → UserService",
+            "source_a": "src/utils/auth.ts",
+            "source_b": "src/services/userService.ts",
+            "test_file": "src/__integration__/auth-user.test.ts",
+            "status": "passed",
+            "tests": [
+                {
+                    "name": "ログインフロー: 認証→ユーザー取得",
+                    "viewpoint": "認証トークンを使ったユーザー情報取得の一連のフロー",
+                    "expected": "正しい認証情報でログイン→有効なトークン取得→そのトークンでユーザー情報が取得できる",
+                    "status": "passed",
+                    "duration_ms": 120
+                },
+                {
+                    "name": "トークン認証→ユーザー情報参照",
+                    "viewpoint": "既存トークンでのユーザー情報参照",
+                    "expected": "有効なトークンからユーザーIDを抽出し、対応するユーザーデータが返る",
+                    "status": "passed",
+                    "duration_ms": 95
+                }
+            ]
+        },
+        {
+            "name": "UserService → Database",
+            "source_a": "src/services/userService.ts",
+            "source_b": "src/db/prisma.ts",
+            "test_file": "src/__integration__/user-db.test.ts",
+            "status": "partial",
+            "tests": [
+                {
+                    "name": "ユーザー作成→DB保存→取得",
+                    "viewpoint": "CRUDの基本フロー（Create→Read）",
+                    "expected": "createUser で作成したユーザーが getUserById で取得でき、データが一致する",
+                    "status": "passed",
+                    "duration_ms": 250
+                },
+                {
+                    "name": "トランザクション: ロールバック",
+                    "viewpoint": "エラー時のトランザクション整合性",
+                    "expected": "処理途中でエラーが発生した場合、全ての変更がロールバックされてDB状態が元に戻る",
+                    "status": "failed",
+                    "duration_ms": 340,
+                    "error": "Transaction timeout"
+                },
+                {
+                    "name": "並行書き込みの排他制御",
+                    "viewpoint": "同時書き込み時のデータ競合",
+                    "expected": "2つの同時更新が競合した場合、片方が失敗するか楽観的ロックで検出される",
+                    "status": "untested"
+                }
+            ]
+        },
+        {
+            "name": "Auth → SessionStore",
+            "source_a": "src/utils/auth.ts",
+            "source_b": "src/store/session.ts",
+            "test_file": null,
+            "status": "uncovered",
+            "tests": []
+        },
+        {
+            "name": "NotificationService → EmailProvider",
+            "source_a": "src/services/notificationService.ts",
+            "source_b": "src/providers/email.ts",
+            "test_file": null,
+            "status": "uncovered",
+            "tests": []
+        },
+        {
+            "name": "FormValidation → UserService",
+            "source_a": "src/utils/validation.ts",
+            "source_b": "src/services/userService.ts",
+            "test_file": "src/__integration__/form-user.test.ts",
+            "status": "passed",
+            "tests": [
+                {
+                    "name": "バリデーション通過→ユーザー作成成功",
+                    "viewpoint": "バリデーション→サービス呼び出しの正常フロー",
+                    "expected": "全フィールドがバリデーション通過後、userServiceが正常にユーザーを作成する",
+                    "status": "passed",
+                    "duration_ms": 180
+                },
+                {
+                    "name": "バリデーション失敗→ユーザー作成拒否",
+                    "viewpoint": "バリデーション失敗時のサービス呼び出し阻止",
+                    "expected": "バリデーションエラーがある場合、userServiceが呼ばれず、エラーメッセージが返る",
+                    "status": "passed",
+                    "duration_ms": 65
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "id": "{{surface-id}}",
+    "name": "{{surface-name}}",
+    "type": "page",
+    "description": "",
+    "source_files": [],
+    "viewpoints": [
+        {
+            "id": "VP-001",
+            "category": "normal",
+            "title": "画面が正常に表示される",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-002",
+            "category": "error",
+            "title": "APIエラー時にエラー表示される",
+            "status": "untested",
+            "priority": "must",
+            "children": []
+        },
+        {
+            "id": "VP-003",
+            "category": "display",
+            "title": "ローディング中の表示が適切",
+            "status": "untested",
+            "priority": "should",
+            "children": []
+        },
+        {
+            "id": "VP-004",
+            "category": "data",
+            "title": "データ0件時の表示が適切",
+            "status": "untested",
+            "priority": "should",
+            "children": []
+        },
+        {
+            "id": "VP-005",
+            "category": "accessibility",
+            "title": "キーボード操作で主要機能にアクセスできる",
+            "status": "untested",
+            "priority": "nice",
+            "children": []
+        }
+    ]
+}

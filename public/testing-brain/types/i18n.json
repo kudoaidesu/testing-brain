@@ -1,0 +1,85 @@
+{
+    "test_type": "i18n",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "locales": [
+        {
+            "code": "ja",
+            "name": "日本語",
+            "total_keys": 150,
+            "translated": 150,
+            "missing": 0,
+            "pages": [
+                {
+                    "name": "ログイン",
+                    "viewpoint": "ログイン画面の日本語表示",
+                    "expected": "全ラベル・プレースホルダー・エラーメッセージが日本語",
+                    "status": "passed",
+                    "issues": []
+                },
+                {
+                    "name": "ダッシュボード",
+                    "viewpoint": "ダッシュボードの日本語表示",
+                    "expected": "グラフラベル・ツールチップ含め全日本語",
+                    "status": "passed",
+                    "issues": []
+                }
+            ]
+        },
+        {
+            "code": "en",
+            "name": "English",
+            "total_keys": 150,
+            "translated": 148,
+            "missing": 2,
+            "pages": [
+                {
+                    "name": "Login",
+                    "viewpoint": "ログイン画面の英語表示",
+                    "expected": "全テキストが英語化され、日本語が混在しない",
+                    "status": "passed",
+                    "issues": []
+                },
+                {
+                    "name": "Dashboard",
+                    "viewpoint": "ダッシュボードの英語表示",
+                    "expected": "全テキストが英語化される",
+                    "status": "failed",
+                    "issues": [
+                        {
+                            "type": "未翻訳",
+                            "description": "「お知らせ」が翻訳されていない",
+                            "element": "#notification-title"
+                        },
+                        {
+                            "type": "レイアウト崩れ",
+                            "description": "長い英語テキストでボタンがはみ出す",
+                            "element": ".action-btn"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "zh",
+            "name": "中文",
+            "total_keys": 150,
+            "translated": 120,
+            "missing": 30,
+            "pages": [
+                {
+                    "name": "登录",
+                    "viewpoint": "ログイン画面の中国語表示",
+                    "expected": "全ラベルが中国語化される",
+                    "status": "partial",
+                    "issues": [
+                        {
+                            "type": "未翻訳",
+                            "description": "パスワードリセットリンクが日本語のまま",
+                            "element": "#reset-link"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,282 @@
+{
+    "test_type": "unit",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "coverage": {
+        "line": 68.2,
+        "branch": 54.1,
+        "function": 72.5,
+        "statement": 67.8
+    },
+    "files": [
+        {
+            "path": "src/utils/auth.ts",
+            "test_file": "src/utils/__tests__/auth.test.ts",
+            "functions_total": 8,
+            "functions_tested": 6,
+            "line_coverage": 82.5,
+            "branch_coverage": 70.0,
+            "status": "partial",
+            "tests": [
+                {
+                    "name": "hashPassword は正しいハッシュを返す",
+                    "viewpoint": "パスワードハッシュ化の正常系",
+                    "expected": "bcryptで生成されたハッシュ文字列が返る。元のパスワードとは異なる値になる。",
+                    "status": "passed",
+                    "duration_ms": 12
+                },
+                {
+                    "name": "verifyPassword は一致時にtrueを返す",
+                    "viewpoint": "パスワード照合の正常系",
+                    "expected": "正しいパスワードとハッシュの組み合わせでtrueが返る",
+                    "status": "passed",
+                    "duration_ms": 8
+                },
+                {
+                    "name": "verifyPassword は不一致時にfalseを返す",
+                    "viewpoint": "パスワード照合の異常系",
+                    "expected": "不正なパスワードでfalseが返る。例外はスローしない。",
+                    "status": "passed",
+                    "duration_ms": 5
+                },
+                {
+                    "name": "generateToken はJWT形式の文字列を返す",
+                    "viewpoint": "トークン生成の正常系",
+                    "expected": "xxx.yyy.zzz 形式のJWT文字列が返る。payload にユーザーIDが含まれる。",
+                    "status": "passed",
+                    "duration_ms": 15
+                },
+                {
+                    "name": "validateToken は有効なトークンでtrueを返す",
+                    "viewpoint": "トークン検証の正常系",
+                    "expected": "有効期限内の正しい署名を持つトークンでtrueが返る",
+                    "status": "passed",
+                    "duration_ms": 10
+                },
+                {
+                    "name": "validateToken は期限切れトークンでfalseを返す",
+                    "viewpoint": "トークン検証の期限切れケース",
+                    "expected": "期限切れトークンで false が返る（TokenExpiredError をキャッチして false を返す想定）",
+                    "status": "failed",
+                    "duration_ms": 22,
+                    "error": "Expected false but got Error: TokenExpiredError"
+                }
+            ]
+        },
+        {
+            "path": "src/utils/validation.ts",
+            "test_file": "src/utils/__tests__/validation.test.ts",
+            "functions_total": 12,
+            "functions_tested": 12,
+            "line_coverage": 95.0,
+            "branch_coverage": 88.0,
+            "status": "covered",
+            "tests": [
+                {
+                    "name": "isValidEmail は正しいメールアドレスでtrue",
+                    "viewpoint": "メールバリデーション正常系",
+                    "expected": "RFC 5322準拠のメールアドレスでtrue",
+                    "status": "passed",
+                    "duration_ms": 3
+                },
+                {
+                    "name": "isValidEmail は不正な形式でfalse",
+                    "viewpoint": "メールバリデーション異常系",
+                    "expected": "@なし、ドメインなし等でfalse",
+                    "status": "passed",
+                    "duration_ms": 2
+                },
+                {
+                    "name": "isValidPassword は8文字以上でtrue",
+                    "viewpoint": "パスワード長の境界値（正常側）",
+                    "expected": "ちょうど8文字でtrue",
+                    "status": "passed",
+                    "duration_ms": 2
+                },
+                {
+                    "name": "isValidPassword は7文字以下でfalse",
+                    "viewpoint": "パスワード長の境界値（異常側）",
+                    "expected": "7文字でfalse。空文字でもfalse。",
+                    "status": "passed",
+                    "duration_ms": 1
+                },
+                {
+                    "name": "sanitizeInput はXSS文字列を除去する",
+                    "viewpoint": "XSSサニタイズ",
+                    "expected": "<script>タグ、onerror属性等が除去された安全な文字列が返る",
+                    "status": "passed",
+                    "duration_ms": 4
+                }
+            ]
+        },
+        {
+            "path": "src/utils/format.ts",
+            "test_file": null,
+            "functions_total": 5,
+            "functions_tested": 0,
+            "line_coverage": 0,
+            "branch_coverage": 0,
+            "status": "uncovered",
+            "tests": []
+        },
+        {
+            "path": "src/hooks/useAuth.ts",
+            "test_file": "src/hooks/__tests__/useAuth.test.ts",
+            "functions_total": 4,
+            "functions_tested": 3,
+            "line_coverage": 75.0,
+            "branch_coverage": 60.0,
+            "status": "partial",
+            "tests": [
+                {
+                    "name": "useAuth はログイン状態を返す",
+                    "viewpoint": "認証状態の初期取得",
+                    "expected": "マウント時にlocalStorageからトークンを読み込み、isAuthenticated を返す",
+                    "status": "passed",
+                    "duration_ms": 45
+                },
+                {
+                    "name": "useAuth.login は認証情報をセットする",
+                    "viewpoint": "ログイン処理後の状態更新",
+                    "expected": "login呼び出し後、isAuthenticated=true となり、tokenがlocalStorageに保存される",
+                    "status": "passed",
+                    "duration_ms": 38
+                },
+                {
+                    "name": "useAuth.logout はセッションをクリアする",
+                    "viewpoint": "ログアウト後のクリーンアップ",
+                    "expected": "tokenが削除され、isAuthenticated=false となる。リダイレクトは行わない。",
+                    "status": "passed",
+                    "duration_ms": 30
+                }
+            ]
+        },
+        {
+            "path": "src/hooks/useForm.ts",
+            "test_file": "src/hooks/__tests__/useForm.test.ts",
+            "functions_total": 6,
+            "functions_tested": 4,
+            "line_coverage": 65.0,
+            "branch_coverage": 50.0,
+            "status": "partial",
+            "tests": [
+                {
+                    "name": "useForm は初期値を返す",
+                    "viewpoint": "フォーム初期化",
+                    "expected": "渡した初期値オブジェクトがそのまま values に反映される",
+                    "status": "passed",
+                    "duration_ms": 12
+                },
+                {
+                    "name": "useForm.setValue はフィールド値を更新する",
+                    "viewpoint": "個別フィールド更新",
+                    "expected": "指定フィールドのみ更新され、他フィールドは変化しない",
+                    "status": "passed",
+                    "duration_ms": 8
+                },
+                {
+                    "name": "useForm.validate はエラーを返す",
+                    "viewpoint": "バリデーション実行",
+                    "expected": "ルール違反があるフィールドにエラーメッセージが設定される",
+                    "status": "passed",
+                    "duration_ms": 15
+                },
+                {
+                    "name": "useForm.reset はフォームをリセットする",
+                    "viewpoint": "フォームリセット",
+                    "expected": "全フィールドが初期値に戻り、エラーもクリアされる",
+                    "status": "passed",
+                    "duration_ms": 6
+                }
+            ]
+        },
+        {
+            "path": "src/services/userService.ts",
+            "test_file": "src/services/__tests__/userService.test.ts",
+            "functions_total": 6,
+            "functions_tested": 5,
+            "line_coverage": 80.0,
+            "branch_coverage": 65.0,
+            "status": "partial",
+            "tests": [
+                {
+                    "name": "getUsers は全ユーザー一覧を返す",
+                    "viewpoint": "一覧取得の正常系",
+                    "expected": "全ユーザーの配列が返り、各要素にid,name,emailが含まれる",
+                    "status": "passed",
+                    "duration_ms": 20
+                },
+                {
+                    "name": "getUserById は指定ユーザーを返す",
+                    "viewpoint": "個別取得の正常系",
+                    "expected": "指定IDのユーザーオブジェクトが返る",
+                    "status": "passed",
+                    "duration_ms": 15
+                },
+                {
+                    "name": "createUser は新規ユーザーを作成する",
+                    "viewpoint": "作成の正常系",
+                    "expected": "新規ユーザーがDB保存され、生成されたIDを含むオブジェクトが返る",
+                    "status": "passed",
+                    "duration_ms": 25
+                },
+                {
+                    "name": "updateUser はユーザー情報を更新する",
+                    "viewpoint": "更新の正常系",
+                    "expected": "指定フィールドのみ更新され、updated_atが現在時刻になる",
+                    "status": "passed",
+                    "duration_ms": 18
+                },
+                {
+                    "name": "deleteUser はユーザーを削除する",
+                    "viewpoint": "削除時の外部キー制約",
+                    "expected": "紐づくデータがある場合でもカスケード削除or論理削除される",
+                    "status": "failed",
+                    "duration_ms": 30,
+                    "error": "ForeignKeyConstraintError"
+                }
+            ]
+        },
+        {
+            "path": "src/services/notificationService.ts",
+            "test_file": null,
+            "functions_total": 4,
+            "functions_tested": 0,
+            "line_coverage": 0,
+            "branch_coverage": 0,
+            "status": "uncovered",
+            "tests": []
+        },
+        {
+            "path": "src/components/Button.tsx",
+            "test_file": "src/components/__tests__/Button.test.tsx",
+            "functions_total": 1,
+            "functions_tested": 1,
+            "line_coverage": 100.0,
+            "branch_coverage": 100.0,
+            "status": "covered",
+            "tests": [
+                {
+                    "name": "Button はクリックイベントを発火する",
+                    "viewpoint": "クリックハンドラの呼び出し",
+                    "expected": "onClickコールバックが1回だけ呼ばれる",
+                    "status": "passed",
+                    "duration_ms": 25
+                },
+                {
+                    "name": "Button はdisabled時にクリックを無視する",
+                    "viewpoint": "disabled状態の挙動",
+                    "expected": "disabled=trueの時、クリックしてもonClickが呼ばれない",
+                    "status": "passed",
+                    "duration_ms": 18
+                },
+                {
+                    "name": "Button はloading中にスピナーを表示する",
+                    "viewpoint": "ローディング表示",
+                    "expected": "loading=trueの時、ボタンテキストの代わりにスピナーアイコンが表示される",
+                    "status": "passed",
+                    "duration_ms": 22
+                }
+            ]
+        }
+    ]
+}

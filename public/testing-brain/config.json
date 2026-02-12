@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0",
+    "project": {
+        "name": "Sample Web App",
+        "description": "テスト網羅性管理のサンプルプロジェクト",
+        "root_path": "../sample-project",
+        "exclude_paths": [
+            "node_modules",
+            "dist",
+            ".git",
+            "testing-brain"
+        ]
+    },
+    "settings": {
+        "auto_refresh_interval_ms": 3000,
+        "default_template": "web-page"
+    }
+}

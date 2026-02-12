@@ -1,0 +1,98 @@
+{
+    "test_type": "performance",
+    "last_updated": "2026-02-11T21:00:00+09:00",
+    "tool": "Lighthouse + Web Vitals",
+    "lighthouse": {
+        "performance_score": 78,
+        "accessibility_score": 85,
+        "best_practices_score": 92,
+        "seo_score": 88
+    },
+    "core_web_vitals": {
+        "LCP": {
+            "value_ms": 2400,
+            "rating": "needs_improvement",
+            "threshold_good": 2500,
+            "threshold_poor": 4000
+        },
+        "FID": {
+            "value_ms": 85,
+            "rating": "good",
+            "threshold_good": 100,
+            "threshold_poor": 300
+        },
+        "CLS": {
+            "value": 0.12,
+            "rating": "needs_improvement",
+            "threshold_good": 0.1,
+            "threshold_poor": 0.25
+        },
+        "TTFB": {
+            "value_ms": 620,
+            "rating": "needs_improvement",
+            "threshold_good": 800,
+            "threshold_poor": 1800
+        },
+        "INP": {
+            "value_ms": 180,
+            "rating": "good",
+            "threshold_good": 200,
+            "threshold_poor": 500
+        }
+    },
+    "bundle": {
+        "total_size_kb": 485,
+        "chunks": [
+            {
+                "name": "main.js",
+                "size_kb": 180,
+                "gzip_kb": 52
+            },
+            {
+                "name": "vendor.js",
+                "size_kb": 220,
+                "gzip_kb": 68
+            },
+            {
+                "name": "styles.css",
+                "size_kb": 45,
+                "gzip_kb": 12
+            },
+            {
+                "name": "lazy-dashboard.js",
+                "size_kb": 40,
+                "gzip_kb": 11
+            }
+        ]
+    },
+    "api_response_times": [
+        {
+            "endpoint": "GET /api/users",
+            "p50_ms": 45,
+            "p95_ms": 120,
+            "p99_ms": 350,
+            "status": "good"
+        },
+        {
+            "endpoint": "POST /api/users",
+            "p50_ms": 80,
+            "p95_ms": 250,
+            "p99_ms": 800,
+            "status": "needs_improvement"
+        },
+        {
+            "endpoint": "GET /api/users/:id",
+            "p50_ms": 25,
+            "p95_ms": 60,
+            "p99_ms": 150,
+            "status": "good"
+        },
+        {
+            "endpoint": "POST /api/auth/login",
+            "p50_ms": 150,
+            "p95_ms": 400,
+            "p99_ms": 1200,
+            "status": "poor"
+        }
+    ]
+}

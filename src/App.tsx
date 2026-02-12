@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Brain, Sun, Moon, Globe } from 'lucide-react';
+import { Activity, Sun, Moon, Globe } from 'lucide-react';
 import { useBrainData } from './hooks/useBrainData';
 import { TestTypeNav } from './components/TestTypeNav';
 import { MetricsBar } from './components/MetricsBar';
@@ -105,7 +105,7 @@ export default function App() {
             >
                 <div className="max-w-screen-xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                        <Brain className="w-5 h-5 text-primary flex-shrink-0" />
+                        <Activity className="w-5 h-5 text-primary flex-shrink-0" />
                         <h1 className="text-sm font-semibold truncate" style={{ color: 'var(--fg)' }}>{t('header.title')}</h1>
                         <span
                             className="text-xs px-2 py-0.5 rounded font-mono hidden sm:inline"
